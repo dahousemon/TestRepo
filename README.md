@@ -1,6 +1,6 @@
 # Colorado Peaks Explorer
 
-A native iOS app built with Swift and SwiftUI that provides comprehensive information on over 200 of Colorado's highest mountain peaks, plus a curated selection of Front Range peaks visible from Denver.
+A native iOS app built with Swift and SwiftUI that provides comprehensive information on 200 of Colorado's highest mountain peaks (all 53 fourteeners + 147 thirteeners), plus 14 curated Front Range peaks visible from Denver.
 
 ![iOS](https://img.shields.io/badge/iOS-15.0%2B-blue)
 ![Swift](https://img.shields.io/badge/Swift-5.5%2B-orange)
@@ -9,8 +9,8 @@ A native iOS app built with Swift and SwiftUI that provides comprehensive inform
 ## Features
 
 ### Core Features
-- **Comprehensive Peak Database**: Information on 200+ Colorado peaks including all 53 fourteeners
-- **Front Range Peaks**: Curated list of peaks visible from Denver with viewing information
+- **Comprehensive Peak Database**: Information on 200 of Colorado's highest peaks (all 53 fourteeners + 147 thirteeners)
+- **Front Range Peaks**: 14 curated peaks visible from Denver with viewing information
 - **Offline Access**: Full functionality after initial data load with local caching
 - **Peak Details**:
   - Elevation, prominence, and coordinates
@@ -229,7 +229,7 @@ All elevation and coordinate data has been cross-referenced with USGS sources. F
 ## Peak Categories
 
 ### Top 200 Highest Peaks
-Includes all 53 fourteeners (peaks over 14,000 ft) and the highest thirteeners, ranked by elevation down to approximately 13,500 ft.
+Contains exactly 200 of Colorado's highest peaks: all 53 fourteeners (peaks over 14,000 ft) plus 147 of the highest thirteeners, ranked by elevation from Mount Elbert (14,433 ft) down to Vermillion Peak (13,504 ft).
 
 **Notable Peaks**:
 - Mount Elbert (14,433 ft) - Highest in Colorado
@@ -238,7 +238,7 @@ Includes all 53 fourteeners (peaks over 14,000 ft) and the highest thirteeners, 
 - Highest thirteeners
 
 ### Front Range Peaks Visible from Denver
-Curated selection of approximately 14 peaks that are visible from Denver on clear days, based on verified sources.
+Contains exactly 14 curated peaks that are visible from Denver on clear days, based on verified sources including FOX31 Denver and PeakVisor.
 
 **Notable Peaks**:
 - Longs Peak (14,259 ft) - Northwest view
