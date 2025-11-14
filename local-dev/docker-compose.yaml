@@ -1,0 +1,126 @@
+# =============================================================================
+# Docker Compose - Local Development Environment
+# =============================================================================
+# Provides:
+#   - SQL Server 2022 container with DevOpsMetrics database
+#   - MCP Server container
+#   - Network connectivity between services
+#
+# Usage:
+#   docker-compose up -d          # Start services
+#   docker-compose logs -f        # View logs
+#   docker-compose down           # Stop services
+#   docker-compose down -v        # Stop and remove volumes
+# =============================================================================
+
+version: '3.8'
+
+services:
+  # ===========================================================================
+  # SQL Server 2022
+  # ===========================================================================
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql-mcp-server-db
+    hostname: sqlserver
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=${SQL_ADMIN_PASSWORD:-YourStrong@Passw0rd123}
+      - MSSQL_PID=Developer
+      - MSSQL_AGENT_ENABLED=true
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+      - ../sql:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "$${SA_PASSWORD}" -Q "SELECT 1" -b -o /dev/null
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    networks:
+      - mcp-network
+    restart: unless-stopped
+
+  # ===========================================================================
+  # SQL Initialization (runs once to setup database)
+  # ===========================================================================
+  sql-init:
+    image: mcr.microsoft.com/mssql-tools
+    container_name: sql-mcp-init
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    environment:
+      - SA_PASSWORD=${SQL_ADMIN_PASSWORD:-YourStrong@Passw0rd123}
+    volumes:
+      - ../sql:/sql:ro
+      - ./scripts:/scripts:ro
+    entrypoint: ["/scripts/init-database.sh"]
+    networks:
+      - mcp-network
+
+  # ===========================================================================
+  # MCP Server
+  # ===========================================================================
+  mcp-server:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: sql-mcp-server
+    depends_on:
+      sql-init:
+        condition: service_completed_successfully
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=development
+      - LOG_LEVEL=debug
+      - HEALTH_PORT=8080
+      # Connection string for container network
+      - SQL_CONNECTION_STRING=Server=sqlserver,1433;Database=DevOpsMetrics;User ID=${SQL_USER:-mcp_user};Password=${SQL_PASSWORD:-McpUser@Pass123};Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;
+    volumes:
+      - ../src:/app/src:ro
+      - ../node_modules:/app/node_modules
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - mcp-network
+    restart: unless-stopped
+
+  # ===========================================================================
+  # SQL Server Management Studio Web (optional)
+  # ===========================================================================
+  adminer:
+    image: adminer:latest
+    container_name: sql-mcp-adminer
+    depends_on:
+      - sqlserver
+    ports:
+      - "8090:8080"
+    environment:
+      - ADMINER_DEFAULT_SERVER=sqlserver
+    networks:
+      - mcp-network
+    restart: unless-stopped
+
+# =============================================================================
+# Networks
+# =============================================================================
+networks:
+  mcp-network:
+    driver: bridge
+    name: mcp-network
+
+# =============================================================================
+# Volumes
+# =============================================================================
+volumes:
+  sqlserver-data:
+    name: sql-mcp-server-data
+    driver: local

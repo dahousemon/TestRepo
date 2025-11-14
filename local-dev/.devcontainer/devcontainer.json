@@ -1,0 +1,130 @@
+{
+  "name": "SQL MCP Server Dev Container",
+  "dockerComposeFile": "../docker-compose.yaml",
+  "service": "mcp-server",
+  "workspaceFolder": "/app",
+
+  // Features to install
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    },
+    "ghcr.io/devcontainers/features/azure-cli:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/git:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {
+      "version": "latest"
+    }
+  },
+
+  // VS Code customizations
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // Node.js and JavaScript
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-vscode.vscode-node-azure-pack",
+
+        // Docker
+        "ms-azuretools.vscode-docker",
+
+        // SQL
+        "ms-mssql.mssql",
+
+        // Azure
+        "ms-azuretools.vscode-bicep",
+        "ms-vscode.azure-account",
+
+        // GitHub
+        "github.vscode-pull-request-github",
+        "github.copilot",
+        "github.copilot-chat",
+
+        // Utilities
+        "eamodio.gitlens",
+        "streetsidesoftware.code-spell-checker",
+        "redhat.vscode-yaml"
+      ],
+
+      "settings": {
+        // Editor
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
+
+        // Files
+        "files.exclude": {
+          "**/node_modules": true,
+          "**/.git": true
+        },
+
+        // ESLint
+        "eslint.validate": ["javascript"],
+
+        // Prettier
+        "prettier.requireConfig": true,
+
+        // Terminal
+        "terminal.integrated.defaultProfile.linux": "bash",
+
+        // SQL Tools
+        "mssql.connections": [
+          {
+            "server": "sqlserver",
+            "database": "DevOpsMetrics",
+            "authenticationType": "SqlLogin",
+            "user": "mcp_user",
+            "password": "",
+            "savePassword": false,
+            "profileName": "Local SQL Server"
+          }
+        ]
+      }
+    }
+  },
+
+  // Port forwarding
+  "forwardPorts": [
+    8080,  // MCP Server health endpoint
+    1433,  // SQL Server
+    8090   // Adminer
+  ],
+
+  "portsAttributes": {
+    "8080": {
+      "label": "MCP Server",
+      "onAutoForward": "notify"
+    },
+    "1433": {
+      "label": "SQL Server",
+      "onAutoForward": "silent"
+    },
+    "8090": {
+      "label": "Adminer (SQL UI)",
+      "onAutoForward": "notify"
+    }
+  },
+
+  // Post-create command
+  "postCreateCommand": "npm install",
+
+  // Environment variables
+  "containerEnv": {
+    "NODE_ENV": "development",
+    "LOG_LEVEL": "debug"
+  },
+
+  // Run as non-root user
+  "remoteUser": "nodejs",
+
+  // Mount local SSH keys for git
+  "mounts": [
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/nodejs/.ssh,readonly,type=bind,consistency=cached"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://github.com/github/copilot-mcp-config/blob/main/schema.json",
+  "description": "GitHub Copilot MCP Server Configuration for SQL MCP Server",
+  "mcpServers": {
+    "sql-devops-metrics": {
+      "command": "node",
+      "args": [
+        "/path/to/sql-mcp-server/src/server.js"
+      ],
+      "env": {
+        "SQL_CONNECTION_STRING": "Server=localhost,1433;Database=DevOpsMetrics;User ID=mcp_user;Password=McpUser@Pass123;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;",
+        "NODE_ENV": "development",
+        "LOG_LEVEL": "info"
+      },
+      "description": "SQL MCP Server for DevOps Metrics Database",
+      "metadata": {
+        "version": "1.0.0",
+        "capabilities": [
+          "listTables",
+          "describeTable",
+          "runQuery"
+        ],
+        "database": "DevOpsMetrics",
+        "access": "read-only"
+      }
+    }
+  }
+}

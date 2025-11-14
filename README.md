@@ -1,404 +1,357 @@
-# Colorado Peaks Explorer
+# SQL MCP Server - Enterprise Edition
 
-A native iOS app built with Swift and SwiftUI that provides comprehensive information on 200 of Colorado's highest mountain peaks (all 53 fourteeners + 147 thirteeners), plus 14 curated Front Range peaks visible from Denver.
+Production-ready SQL Model Context Protocol (MCP) server for secure read-only access to Azure SQL Database in GitHub Enterprise environments.
 
-![iOS](https://img.shields.io/badge/iOS-15.0%2B-blue)
-![Swift](https://img.shields.io/badge/Swift-5.5%2B-orange)
-![SwiftUI](https://img.shields.io/badge/SwiftUI-3.0%2B-green)
+## 🎯 Overview
 
-## Features
+This system provides AI assistants (ChatGPT, GitHub Copilot) with secure, read-only access to your DevOps metrics stored in Azure SQL Database through the Model Context Protocol (MCP).
 
-### Core Features
-- **Comprehensive Peak Database**: Information on 200 of Colorado's highest peaks (all 53 fourteeners + 147 thirteeners)
-- **Front Range Peaks**: 14 curated peaks visible from Denver with viewing information
-- **Offline Access**: Full functionality after initial data load with local caching
-- **Peak Details**:
-  - Elevation, prominence, and coordinates
-  - Mountain range and location
-  - Hiking difficulty (Class ratings)
-  - Fun facts and trivia
-  - High-quality peak images
-- **Google Maps Integration**: Direct links to peak locations in Google Maps
-- **Advanced Search**: Filter peaks by name, range, or elevation
-- **Multiple Sort Options**: Sort by elevation, alphabetical, or prominence
-- **Category Filtering**: Filter by Top 200 or Front Range peaks
-- **Colorado-Inspired UI**: Beautiful design with colors inspired by Colorado's landscapes
-- **Accessibility**: Full VoiceOver support and dynamic text sizing
+**Use Cases**:
+- Query build and test data using natural language
+- Analyze test flakiness trends
+- Generate reports on CI/CD performance
+- Investigate build failures
+- Track quality metrics over time
 
-### Technical Features
-- Native iOS app (iOS 15+)
-- Built with Swift and SwiftUI
-- Efficient image caching for fast loading
-- Data persistence with UserDefaults
-- 30-day cache refresh mechanism
-- Smooth performance with 200+ entries
-- Error handling with fallback to cached data
+## ✨ Features
 
-## Screenshots
+### Security
+- ✅ Read-only database access
+- ✅ SQL injection prevention
+- ✅ Azure Private Endpoint (no public SQL access)
+- ✅ Azure Key Vault for secrets
+- ✅ Managed Identity authentication
+- ✅ Query validation and sanitization
+- ✅ Comprehensive audit logging
 
-*Home Screen with Peak List*
-- Searchable list of all peaks
-- Category filters (All, Top 200, Front Range)
-- Sort options (Elevation, Name, Prominence)
-- Beautiful peak thumbnails
+### Infrastructure
+- ✅ Complete Bicep Infrastructure as Code
+- ✅ Azure Container Apps with auto-scaling
+- ✅ GitHub Enterprise CI/CD with OIDC
+- ✅ VNet isolation with NSGs
+- ✅ Log Analytics integration
+- ✅ Zero-downtime deployments
 
-*Peak Detail Screen*
-- Large peak image
-- Comprehensive peak information
-- Fun facts and trivia
-- Google Maps integration
-- Front Range viewing information (if applicable)
+### Developer Experience
+- ✅ Local development with Docker Compose
+- ✅ VS Code Dev Containers
+- ✅ ChatGPT Desktop integration
+- ✅ GitHub Copilot integration
+- ✅ Comprehensive documentation
+- ✅ Sample data and queries
 
-## Installation & Setup
-
-### Requirements
-- macOS 12.0+ with Xcode 13.0+
-- iOS 15.0+ (for running the app)
-- iPhone or iPad device/simulator
-
-### Setup Instructions
-
-1. **Clone the Repository**
-   ```bash
-   git clone https://github.com/yourusername/colorado-peaks-explorer.git
-   cd colorado-peaks-explorer
-   ```
-
-2. **Open in Xcode**
-   ```bash
-   open ColoradoPeaksExplorer/ColoradoPeaksExplorer.xcodeproj
-   ```
-
-   If you don't have an Xcode project file yet, create one:
-   - Open Xcode
-   - Select "Create a new Xcode project"
-   - Choose "iOS" → "App"
-   - Product Name: `ColoradoPeaksExplorer`
-   - Interface: SwiftUI
-   - Language: Swift
-   - Organization Identifier: `com.yourname`
-   - Click "Next" and select the `ColoradoPeaksExplorer` folder
-
-3. **Add Files to Project**
-
-   Drag and drop the following folders into your Xcode project:
-   - `Models/` (Peak.swift, ColorTheme.swift)
-   - `Views/` (HomeView.swift, PeakDetailView.swift)
-   - `Services/` (PeakDataService.swift, ImageCache.swift)
-   - `Resources/` (peaks_data.json)
-   - `SupportingFiles/` (Info.plist)
-   - `ColoradoPeaksExplorerApp.swift` (main app file)
-
-   **Important**: When adding `peaks_data.json`, make sure "Copy items if needed" and "Add to targets: ColoradoPeaksExplorer" are both checked.
-
-4. **Configure the Project**
-
-   In Xcode:
-   - Select the project in the navigator
-   - Select the "ColoradoPeaksExplorer" target
-   - Go to "Signing & Capabilities"
-   - Select your Team
-   - Xcode will automatically manage signing
-
-5. **Configure Info.plist**
-
-   The Info.plist is already configured, but ensure it's set as the project's Info.plist:
-   - Select the project → target → "Build Settings"
-   - Search for "Info.plist File"
-   - Set to: `ColoradoPeaksExplorer/SupportingFiles/Info.plist`
-
-6. **Build and Run**
-   - Select a simulator or connected device
-   - Press `Cmd + R` or click the "Run" button
-   - The app will build and launch
-
-### Project Structure
+## 🏗️ Architecture
 
 ```
-ColoradoPeaksExplorer/
-├── ColoradoPeaksExplorer/
-│   ├── ColoradoPeaksExplorerApp.swift    # Main app entry point
-│   ├── Models/
-│   │   ├── Peak.swift                     # Peak data model
-│   │   └── ColorTheme.swift               # UI color theme
-│   ├── Views/
-│   │   ├── HomeView.swift                 # Home screen
-│   │   └── PeakDetailView.swift           # Detail screen
-│   ├── Services/
-│   │   ├── PeakDataService.swift          # Data fetching & caching
-│   │   └── ImageCache.swift               # Image loading & caching
-│   ├── Resources/
-│   │   └── peaks_data.json                # Peak database
-│   └── SupportingFiles/
-│       └── Info.plist                     # App configuration
-└── README.md                               # This file
+┌─────────────────────────────────────────────────────────────┐
+│                    GitHub Enterprise                         │
+│                   CI/CD (OIDC Auth)                          │
+└───────────────────────┬─────────────────────────────────────┘
+                        │
+                        ▼
+┌─────────────────────────────────────────────────────────────┐
+│                    Azure Subscription                        │
+│                                                              │
+│  ┌────────────────┐  ┌──────────────┐  ┌────────────────┐  │
+│  │ Container App  │  │  Azure SQL   │  │  Key Vault     │  │
+│  │ (MCP Server)   │──│  Database    │  │  (Secrets)     │  │
+│  │                │  │  (Private    │  │                │  │
+│  │ - Node.js      │  │   Endpoint)  │  │                │  │
+│  │ - Read-only    │  │              │  │                │  │
+│  └────────────────┘  └──────────────┘  └────────────────┘  │
+│          │                                                   │
+│  ┌───────▼────────────────────────────────────────────┐    │
+│  │       Log Analytics Workspace                       │    │
+│  │       (Centralized Logging & Monitoring)            │    │
+│  └─────────────────────────────────────────────────────┘    │
+└──────────────────────────────────────────────────────────────┘
+                        │
+                        ▼
+┌─────────────────────────────────────────────────────────────┐
+│           AI Assistants (via MCP Protocol)                   │
+│                                                              │
+│    ChatGPT Desktop          GitHub Copilot                   │
+│         │                        │                           │
+│         └────────────────────────┘                           │
+│                    │                                         │
+│          Natural Language Queries                            │
+└──────────────────────────────────────────────────────────────┘
 ```
 
-## Usage Guide
-
-### Home Screen
-
-**Search Peaks**
-- Tap the search bar at the top
-- Type peak name, range, or elevation
-- Results filter in real-time
-
-**Filter by Category**
-- Tap "All Peaks" to see everything
-- Tap "Top 200" to see Colorado's highest peaks
-- Tap "Front Range" to see peaks visible from Denver
-
-**Sort Peaks**
-- Use the segmented control to sort by:
-  - **Elevation**: Highest to lowest (default)
-  - **Name**: Alphabetical A-Z
-  - **Prominence**: Most prominent first
-
-**View Peak Details**
-- Tap any peak row to see full details
-
-**Refresh Data**
-- Tap the refresh button (↻) in the top-right corner
-- Data automatically refreshes every 30 days
-
-### Peak Detail Screen
-
-**View Information**
-- Scroll to see all peak details
-- Elevation, prominence, and coordinates
-- Hiking difficulty rating
-- Fun facts and trivia
-- Peak image
-
-**Open in Maps**
-- Tap "Open in Google Maps" button
-- Opens Google Maps (or Maps app) with peak coordinates
-- View terrain, satellite imagery, and directions
-
-**Front Range Peaks**
-- Additional information for Denver-visible peaks
-- Direction from Denver (e.g., Northwest)
-- Distance from Denver (in miles)
-
-### Accessibility
+## 📁 Project Structure
+
+```
+sql-mcp-server/
+├── src/                    # MCP Server implementation
+│   ├── server.js          # Main MCP server
+│   ├── db.js              # Database connection
+│   ├── security.js        # Query validation
+│   ├── logger.js          # Structured logging
+│   └── health.js          # Health check endpoints
+├── sql/                    # Database scripts
+│   ├── 01-security-setup.sql
+│   ├── 02-create-schema.sql
+│   ├── 03-create-views.sql
+│   └── 04-sample-data.sql
+├── iac/                    # Bicep infrastructure
+│   ├── main.bicep
+│   └── modules/
+├── github/workflows/       # CI/CD pipelines
+│   ├── ci.yml
+│   └── cd.yml
+├── local-dev/              # Local development
+│   ├── docker-compose.yaml
+│   ├── .env.example
+│   └── .devcontainer/
+├── docs/                   # Documentation
+│   ├── 00-architecture.md
+│   ├── 01-setup-guide.md
+│   ├── 02-security-model.md
+│   ├── 03-using-mcp.md
+│   └── 04-sql-examples.md
+├── optional/               # Optional components
+│   └── function-app/      # Event-driven ingestion
+├── Dockerfile
+├── package.json
+└── README.md
+```
+
+## 🚀 Quick Start
+
+### Local Development
+
+```bash
+# Clone repository
+git clone <repository-url>
+cd sql-mcp-server
+
+# Start local environment
+cd local-dev
+cp .env.example .env
+docker-compose up -d
+
+# Verify
+curl http://localhost:8080/health
+```
+
+**Access**:
+- MCP Server: http://localhost:8080
+- SQL Server: localhost:1433
+- Adminer (SQL UI): http://localhost:8090
+
+### Azure Deployment
+
+```bash
+# Login to Azure
+az login
+az account set --subscription <subscription-id>
+
+# Deploy infrastructure
+az group create --name rg-mcp-server-dev --location eastus
+az deployment group create \
+  --resource-group rg-mcp-server-dev \
+  --template-file iac/main.bicep \
+  --parameters iac/parameters.json
+
+# Setup database
+sqlcmd -S <sql-server>.database.windows.net -U sqladmin \
+  -i sql/01-security-setup.sql \
+  -i sql/02-create-schema.sql \
+  -i sql/03-create-views.sql
+
+# Build and push image
+az acr build --registry <acr-name> --image mcp-server:latest .
+
+# Update container app
+az containerapp update \
+  --name <app-name> \
+  --resource-group rg-mcp-server-dev \
+  --image <acr-name>.azurecr.io/mcp-server:latest
+```
+
+## 🔧 Configuration
+
+### ChatGPT Desktop
+
+Add to `~/Library/Application Support/ChatGPT/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "sql-devops-metrics": {
+      "command": "node",
+      "args": ["/path/to/sql-mcp-server/src/server.js"],
+      "env": {
+        "SQL_CONNECTION_STRING": "Server=localhost,1433;Database=DevOpsMetrics;..."
+      }
+    }
+  }
+}
+```
 
-**VoiceOver Support**
-- All UI elements are properly labeled
-- Navigate using VoiceOver gestures
-- Peak information is read clearly
+### GitHub Copilot
 
-**Dynamic Text**
-- Supports system text size settings
-- Go to Settings → Accessibility → Display & Text Size
-- Adjust text size as needed
+Add `.copilot/mcp.json` to your project root with similar configuration.
 
-**High Contrast**
-- App uses accessible color contrasts
-- Colorado-inspired colors meet WCAG standards
+## 📊 Example Queries
 
-## Data Sources
+**Natural Language** → **SQL** (automated by MCP)
 
-### Peak Data Sources
-The peak information was compiled from reliable sources including:
+- "Show me the last 10 builds" → `SELECT TOP 10 * FROM BuildRuns ORDER BY StartTime DESC`
+- "Which tests are flaky?" → `SELECT * FROM vw_TestFlakiness WHERE FlakinessScore > 50`
+- "Build success rate by branch" → Aggregation query with GROUP BY
 
-- **Top 200 Peaks**:
-  - climb13ers.com/colorado-13ers/top-200
-  - Wikipedia's list of Colorado mountain peaks
-  - Peakbagger.com
+## 🛡️ Security
 
-- **Front Range Peaks**:
-  - FOX31 Denver article on peaks visible from Denver
-  - PeakVisor Front Range information
-  - Reddit discussions and local sources
+- **Read-Only**: MCP user can only SELECT
+- **Private Network**: SQL Server has no public access
+- **Secrets Management**: All credentials in Azure Key Vault
+- **Query Validation**: Destructive operations blocked
+- **Audit Logging**: All access logged to Log Analytics
+- **OIDC Authentication**: No long-lived credentials in CI/CD
 
-- **Peak Details**:
-  - 14ers.com for difficulty ratings and routes
-  - SummitPost.org for peak information
-  - AllTrails.com for hiking details
-  - Colorado.com for fun facts
-  - USGS for coordinates and elevation data
+See [docs/02-security-model.md](docs/02-security-model.md) for details.
 
-- **Images**:
-  - Wikimedia Commons (public domain)
-  - USGS imagery
-  - Public domain sources
+## 📚 Documentation
 
-### Data Accuracy
-All elevation and coordinate data has been cross-referenced with USGS sources. Fun facts have been verified from multiple reliable sources. If you notice any inaccuracies, please open an issue.
+| Document | Description |
+|----------|-------------|
+| [Architecture](docs/00-architecture.md) | System architecture and diagrams |
+| [Setup Guide](docs/01-setup-guide.md) | Local and Azure deployment |
+| [Security Model](docs/02-security-model.md) | Security controls and best practices |
+| [Using MCP](docs/03-using-mcp.md) | ChatGPT/Copilot integration |
+| [SQL Examples](docs/04-sql-examples.md) | Useful queries |
 
-## Peak Categories
+## 🧪 Database Schema
 
-### Top 200 Highest Peaks
-Contains exactly 200 of Colorado's highest peaks: all 53 fourteeners (peaks over 14,000 ft) plus 147 of the highest thirteeners, ranked by elevation from Mount Elbert (14,433 ft) down to Vermillion Peak (13,504 ft).
+### BuildRuns
+Tracks CI/CD build executions.
 
-**Notable Peaks**:
-- Mount Elbert (14,433 ft) - Highest in Colorado
-- Mount Massive (14,421 ft) - Second highest
-- All 53 Colorado fourteeners
-- Highest thirteeners
+**Columns**: BuildRunId, Branch, StartTime, EndTime, Status, TriggeredBy, CommitSha, BuildNumber
 
-### Front Range Peaks Visible from Denver
-Contains exactly 14 curated peaks that are visible from Denver on clear days, based on verified sources including FOX31 Denver and PeakVisor.
+### TestRuns
+Individual test execution records.
 
-**Notable Peaks**:
-- Longs Peak (14,259 ft) - Northwest view
-- Mount Blue Sky (14,264 ft) - Most prominent
-- Pikes Peak (14,115 ft) - South view
-- Grays & Torreys Peaks - I-70 corridor
-- Indian Peaks (Arapaho, Apache, Navajo)
+**Columns**: TestRunId, BuildRunId, TestName, TestSuite, StartTime, EndTime, Status
 
-## Technical Details
+### TestFailures
+Detailed failure information.
 
-### Data Management
-- **Initial Load**: Fetches from bundled JSON on first launch
-- **Caching**: Stores data locally using UserDefaults
-- **Refresh**: Automatically refreshes every 30 days if online
-- **Offline Mode**: Full functionality without internet after first load
-- **Image Caching**: NSCache with 50MB limit, 100 image capacity
+**Columns**: TestFailureId, TestRunId, FailureReason, ErrorMessage, StackTrace, FailureCategory
 
-### Performance
-- Efficient list rendering for 200+ peaks
-- Lazy image loading with caching
-- Optimized search and filter algorithms
-- Smooth scrolling and transitions
+### Analytics Views
+- `vw_TestFlakiness` - Flaky test detection with scoring
+- `vw_BuildStatsDaily` - Daily build metrics
+- `vw_RecentBuildSummary` - Recent builds with test metrics
+- `vw_TopFailingTests` - Most frequently failing tests
 
-### Error Handling
-- Graceful fallback to cached data on errors
-- User-friendly error messages
-- Retry functionality
-- Validates JSON structure on load
+## 🔄 CI/CD
 
-## Assumptions & Limitations
+### CI Pipeline
+- Lint (ESLint, Prettier)
+- Test (Jest with coverage)
+- Security scan (Snyk, Trivy)
+- Build Docker image
+- Push to ACR
 
-### Assumptions
-1. **Peak Selection**: The "200 highest" includes all 53 fourteeners plus thirteeners. The exact 200th peak is approximately 13,500-13,600 ft.
+### CD Pipeline
+- Authenticate via OIDC (no stored credentials)
+- Deploy Bicep infrastructure
+- Update Container App
+- Health checks and smoke tests
 
-2. **Denver Visibility**: Front Range peaks marked as "visible from Denver" are based on reliable sources but visibility depends on weather, air quality, and viewing location.
+## 💡 Optional Components
 
-3. **Difficulty Ratings**: Class ratings are general guidelines. Conditions vary by season, weather, and route.
+### Event-Driven Data Ingestion
 
-4. **Image URLs**: Images are from public sources. Some URLs may change over time. The app includes fallback placeholder images.
+Azure Function for automatic build/test data insertion:
 
-5. **Data Updates**: The 30-day refresh is for future API integration. Currently uses bundled JSON.
+```bash
+cd optional/function-app
+npm install
+func start
+```
 
-### Limitations
-1. **Static Data**: Peak elevations and data are based on current USGS measurements. No real-time updates.
+See [optional/README.md](optional/README.md) for details.
 
-2. **Image Availability**: Not all peaks have high-quality public domain images. Generic placeholders are used when needed.
+## 🐛 Troubleshooting
 
-3. **Maps Integration**: Requires Google Maps or Apple Maps app for full functionality.
+### Local Development
 
-4. **iOS Only**: This is an iOS-only app. No Android, web, or macOS versions.
+```bash
+# Check service health
+docker-compose ps
 
-5. **Internet Required**: Initial launch requires internet to load images. Subsequent uses work offline.
+# View logs
+docker-compose logs -f mcp-server
 
-## Future Enhancements
+# Test SQL connection
+docker exec -it sql-mcp-server-db /opt/mssql-tools/bin/sqlcmd \
+  -S localhost -U mcp_user -P "McpUser@Pass123" -d DevOpsMetrics
+```
 
-Potential features for future versions:
-- Weather integration for current conditions
-- Trail information and route details
-- User accounts and favorite peaks
-- Completed peaks tracking
-- Photo sharing capability
-- Augmented Reality peak identification
-- Offline maps integration
-- Push notifications for weather alerts
-- Community features (comments, ratings)
-- Expanded database (all 13ers, 12ers, etc.)
+### Azure Deployment
 
-## Building for Release
+```bash
+# Check container logs
+az containerapp logs show --name <app-name> --resource-group <rg> --tail 100
 
-### Create IPA File
+# Verify revision status
+az containerapp revision list --name <app-name> --resource-group <rg>
 
-1. **Archive the App**
-   - In Xcode, select "Any iOS Device" as the target
-   - Go to Product → Archive
-   - Wait for the archive to complete
+# Test health endpoint (requires VPN/bastion access)
+curl https://<internal-fqdn>/health
+```
 
-2. **Export IPA**
-   - In the Organizer window that opens:
-   - Select your archive
-   - Click "Distribute App"
-   - Choose "Ad Hoc" or "App Store" distribution
-   - Follow the prompts to export the IPA file
+## 📈 Monitoring
 
-3. **TestFlight (Optional)**
-   - For beta testing, upload to App Store Connect
-   - Invite testers via TestFlight
-   - Get feedback before public release
+**Key Metrics**:
+- Query execution time (p50, p95, p99)
+- Error rate
+- Container health status
+- SQL connection pool usage
 
-4. **App Store Submission**
-   - Create app in App Store Connect
-   - Upload via Xcode or Transporter
-   - Submit for review
+**Alerts Configured**:
+- Container restarts (3+ in 10 minutes)
+- Failed authentication attempts (5+ in 5 minutes)
+- High error rate (>5% in 5 minutes)
 
-## Troubleshooting
+## 🤝 Contributing
 
-### Common Issues
+1. Create feature branch
+2. Make changes
+3. Run tests: `npm test`
+4. Lint: `npm run lint`
+5. Create pull request
 
-**Issue**: App crashes on launch
-- **Solution**: Ensure `peaks_data.json` is added to the app target
+## 📝 License
 
-**Issue**: Images not loading
-- **Solution**: Check internet connection on first launch. Images cache after first load.
+MIT License - See LICENSE file
 
-**Issue**: "No peaks found"
-- **Solution**: Verify JSON file is properly formatted and in the Resources folder
+## 🙏 Acknowledgments
 
-**Issue**: Google Maps not opening
-- **Solution**: Ensure Google Maps or Apple Maps is installed on your device
+- Model Context Protocol by Anthropic
+- Azure SQL Database team
+- GitHub Actions team
+- Open source community
 
-**Issue**: Build errors in Xcode
-- **Solution**: Clean build folder (Cmd+Shift+K), then rebuild
+## 📞 Support
 
-**Issue**: Data not updating
-- **Solution**: Delete and reinstall app to clear cache, or wait for 30-day refresh
+- **Issues**: GitHub Issues
+- **Docs**: `/docs` directory
+- **Examples**: `/sql` and `local-dev/`
 
-## Contributing
+## 🗺️ Roadmap
 
-Contributions are welcome! Please:
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
-
-Areas for contribution:
-- Additional peak data and fun facts
-- UI/UX improvements
-- Bug fixes
-- Performance optimizations
-- Additional features
-
-## License
-
-This project is provided as-is for educational and personal use. Peak data is compiled from public sources. Image credits go to their respective owners (Wikimedia Commons, USGS, etc.).
-
-## Credits
-
-**Data Sources**:
-- climb13ers.com
-- 14ers.com
-- SummitPost.org
-- Peakbagger.com
-- USGS
-- Wikipedia
-
-**Images**:
-- Wikimedia Commons contributors
-- USGS imagery database
-
-**Inspiration**:
-- Colorado's incredible mountain landscapes
-- The hiking and climbing community
-
-## Contact
-
-For questions, issues, or suggestions:
-- Open an issue on GitHub
-- Email: [your-email@example.com]
+- [ ] Multi-region deployment support
+- [ ] Advanced caching layer
+- [ ] Query result pagination
+- [ ] GraphQL endpoint (optional)
+- [ ] Prometheus metrics export
+- [ ] Terraform version (alternative to Bicep)
 
 ---
 
-**Enjoy exploring Colorado's peaks!** 🏔️
+**Built with ❤️ for GitHub Enterprise environments**
 
-*Note: This app is not affiliated with any official Colorado state organization. Always check current conditions and your abilities before attempting any peak.*
+For detailed setup instructions, see [docs/01-setup-guide.md](docs/01-setup-guide.md).

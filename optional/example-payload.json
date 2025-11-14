@@ -1,0 +1,33 @@
+{
+  "build": {
+    "branch": "main",
+    "startTime": "2025-01-14T10:00:00Z",
+    "endTime": "2025-01-14T10:15:30Z",
+    "status": "Success",
+    "triggeredBy": "github-actions",
+    "commitSha": "abc123def456",
+    "buildNumber": "Build-2025"
+  },
+  "tests": [
+    {
+      "testName": "test_user_authentication",
+      "testSuite": "AuthenticationTests",
+      "startTime": "2025-01-14T10:05:00Z",
+      "endTime": "2025-01-14T10:05:02Z",
+      "status": "Passed"
+    },
+    {
+      "testName": "test_api_endpoint_validation",
+      "testSuite": "APITests",
+      "startTime": "2025-01-14T10:05:02Z",
+      "endTime": "2025-01-14T10:05:08Z",
+      "status": "Failed",
+      "failure": {
+        "reason": "API returned 500 error",
+        "message": "Internal Server Error: Connection timeout",
+        "stackTrace": "at APIClient.get (api-client.js:45)\n  at test_api_endpoint_validation (api.test.js:123)",
+        "category": "Server Error"
+      }
+    }
+  ]
+}
