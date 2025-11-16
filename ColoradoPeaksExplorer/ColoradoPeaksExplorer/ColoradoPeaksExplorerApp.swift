@@ -13,8 +13,19 @@ struct ColoradoPeaksExplorerApp: App {
 
     var body: some Scene {
         WindowGroup {
-            HomeView()
-                .environmentObject(peakDataService)
+            TabView {
+                HomeView()
+                    .environmentObject(peakDataService)
+                    .tabItem {
+                        Label("Peaks", systemImage: "mountain.2.fill")
+                    }
+
+                RouteOptimizerView()
+                    .environmentObject(peakDataService)
+                    .tabItem {
+                        Label("Route Optimizer", systemImage: "map.fill")
+                    }
+            }
         }
     }
 }
