@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import { getAllPeaks, getPeakBySlug, getNearbyPeaks } from '@/lib/peaks';
 import { formatElevation, formatCoordinates, getDifficultyColor, getDifficultyDescription, getGoogleMapsUrl, cn } from '@/lib/utils';
-import { PeakCard } from '@/components/PeakCard';
 
 interface PageProps {
   params: Promise<{ slug: string }>;

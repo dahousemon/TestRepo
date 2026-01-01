@@ -3,10 +3,12 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import { AuthButton } from './AuthButton';
 
 const navItems = [
   { href: '/', label: 'Peaks' },
   { href: '/map', label: 'Map' },
+  { href: '/dashboard', label: 'Dashboard' },
 ];
 
 export function Header() {
@@ -43,14 +45,7 @@ export function Header() {
           </nav>
 
           {/* Auth buttons */}
-          <div className="flex items-center gap-2">
-            <button className="hidden sm:block px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
-              Sign In
-            </button>
-            <button className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors">
-              Sign Up
-            </button>
-          </div>
+          <AuthButton />
         </div>
       </div>
 

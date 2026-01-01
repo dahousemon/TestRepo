@@ -2,9 +2,23 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { getAllPeaks, getUniqueRanges, filterPeaks } from '@/lib/peaks';
 import { PeakFilters, Peak } from '@/types/peak';
 import { formatElevation, getDifficultyColor, cn } from '@/lib/utils';
+
+// Dynamically import MapView to avoid SSR issues with Mapbox
+const MapView = dynamic(() => import('@/components/MapView').then(mod => mod.MapView), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full flex items-center justify-center bg-gray-100">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4" />
+        <p className="text-gray-600">Loading map...</p>
+      </div>
+    </div>
+  ),
+});
 
 export default function MapPage() {
   const [filters, setFilters] = useState<PeakFilters>({});
@@ -17,30 +31,10 @@ export default function MapPage() {
     return filterPeaks(allPeaks, filters);
   }, [allPeaks, filters]);
 
-  // Calculate map bounds
-  const bounds = useMemo(() => {
-    if (filteredPeaks.length === 0) return { minLat: 37, maxLat: 41, minLng: -109, maxLng: -102 };
-
-    return {
-      minLat: Math.min(...filteredPeaks.map(p => p.latitude)),
-      maxLat: Math.max(...filteredPeaks.map(p => p.latitude)),
-      minLng: Math.min(...filteredPeaks.map(p => p.longitude)),
-      maxLng: Math.max(...filteredPeaks.map(p => p.longitude)),
-    };
-  }, [filteredPeaks]);
-
-  // Transform coordinates to SVG positions
-  const getPosition = (lat: number, lng: number) => {
-    const padding = 0.5;
-    const x = ((lng - (bounds.minLng - padding)) / ((bounds.maxLng + padding) - (bounds.minLng - padding))) * 100;
-    const y = 100 - ((lat - (bounds.minLat - padding)) / ((bounds.maxLat + padding) - (bounds.minLat - padding))) * 100;
-    return { x, y };
-  };
-
   return (
     <div className="h-[calc(100vh-4rem)] flex flex-col lg:flex-row">
       {/* Sidebar */}
-      <aside className="w-full lg:w-80 bg-white border-b lg:border-b-0 lg:border-r border-gray-200 p-4 overflow-y-auto">
+      <aside className="w-full lg:w-80 bg-white border-b lg:border-b-0 lg:border-r border-gray-200 p-4 overflow-y-auto flex-shrink-0">
         <h1 className="text-xl font-bold text-gray-900 mb-4">Peak Map</h1>
 
         {/* Filters */}
@@ -137,66 +131,42 @@ export default function MapPage() {
             </Link>
           </div>
         )}
+
+        {/* Peak list */}
+        <div className="border-t border-gray-200 pt-4 mt-4">
+          <h3 className="text-sm font-medium text-gray-700 mb-2">Peak List</h3>
+          <div className="space-y-1 max-h-64 overflow-y-auto">
+            {filteredPeaks.slice(0, 20).map((peak) => (
+              <button
+                key={peak.id}
+                onClick={() => setSelectedPeak(peak)}
+                className={cn(
+                  'w-full text-left px-2 py-1.5 rounded text-sm transition-colors',
+                  selectedPeak?.id === peak.id
+                    ? 'bg-blue-50 text-blue-700'
+                    : 'hover:bg-gray-50 text-gray-700'
+                )}
+              >
+                <div className="font-medium truncate">{peak.name}</div>
+                <div className="text-xs text-gray-500">{formatElevation(peak.elevation)}</div>
+              </button>
+            ))}
+            {filteredPeaks.length > 20 && (
+              <p className="text-xs text-gray-500 text-center py-2">
+                +{filteredPeaks.length - 20} more peaks
+              </p>
+            )}
+          </div>
+        </div>
       </aside>
 
       {/* Map area */}
-      <div className="flex-1 bg-gray-100 relative">
-        {/* SVG Map placeholder */}
-        <svg
-          viewBox="0 0 100 100"
-          className="w-full h-full"
-          preserveAspectRatio="xMidYMid meet"
-        >
-          {/* Background */}
-          <rect width="100" height="100" fill="#e5e7eb" />
-
-          {/* Grid lines */}
-          {[0, 20, 40, 60, 80, 100].map((pos) => (
-            <g key={pos}>
-              <line x1={pos} y1="0" x2={pos} y2="100" stroke="#d1d5db" strokeWidth="0.2" />
-              <line x1="0" y1={pos} x2="100" y2={pos} stroke="#d1d5db" strokeWidth="0.2" />
-            </g>
-          ))}
-
-          {/* Peak markers */}
-          {filteredPeaks.map((peak) => {
-            const { x, y } = getPosition(peak.latitude, peak.longitude);
-            const isSelected = selectedPeak?.id === peak.id;
-            const color = peak.category === 'fourteener' ? '#f59e0b' : '#0ea5e9';
-
-            return (
-              <g key={peak.id}>
-                <circle
-                  cx={x}
-                  cy={y}
-                  r={isSelected ? 2 : 1.2}
-                  fill={color}
-                  stroke={isSelected ? '#1f2937' : 'white'}
-                  strokeWidth={isSelected ? 0.4 : 0.2}
-                  className="cursor-pointer hover:opacity-80 transition-opacity"
-                  onClick={() => setSelectedPeak(peak)}
-                />
-                {isSelected && (
-                  <text
-                    x={x}
-                    y={y - 3}
-                    textAnchor="middle"
-                    fontSize="2"
-                    fill="#1f2937"
-                    fontWeight="bold"
-                  >
-                    {peak.name}
-                  </text>
-                )}
-              </g>
-            );
-          })}
-        </svg>
-
-        {/* Map instructions overlay */}
-        <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-4 py-2 text-sm text-gray-600 shadow-sm">
-          Click a peak marker to see details. For full interactive map, integrate Mapbox or Google Maps.
-        </div>
+      <div className="flex-1 min-h-[400px] lg:min-h-0">
+        <MapView
+          peaks={filteredPeaks}
+          selectedPeak={selectedPeak}
+          onPeakSelect={setSelectedPeak}
+        />
       </div>
     </div>
   );

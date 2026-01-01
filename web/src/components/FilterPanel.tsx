@@ -1,6 +1,6 @@
 'use client';
 
-import { DifficultyClass, PeakCategory, PeakFilters, PeakSort, SortField, SortOrder } from '@/types/peak';
+import { DifficultyClass, PeakCategory, PeakFilters, PeakSort, SortField } from '@/types/peak';
 import { cn } from '@/lib/utils';
 
 interface FilterPanelProps {

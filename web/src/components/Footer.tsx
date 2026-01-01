@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-400">
@@ -20,10 +22,10 @@ export function Footer() {
           <div>
             <h3 className="text-white font-semibold mb-4">Explore</h3>
             <ul className="space-y-2 text-sm">
-              <li><a href="/" className="hover:text-white transition-colors">All Peaks</a></li>
-              <li><a href="/map" className="hover:text-white transition-colors">Interactive Map</a></li>
-              <li><a href="/?category=fourteener" className="hover:text-white transition-colors">Fourteeners</a></li>
-              <li><a href="/?category=thirteener" className="hover:text-white transition-colors">Thirteeners</a></li>
+              <li><Link href="/" className="hover:text-white transition-colors">All Peaks</Link></li>
+              <li><Link href="/map" className="hover:text-white transition-colors">Interactive Map</Link></li>
+              <li><Link href="/?category=fourteener" className="hover:text-white transition-colors">Fourteeners</Link></li>
+              <li><Link href="/?category=thirteener" className="hover:text-white transition-colors">Thirteeners</Link></li>
             </ul>
           </div>
 
