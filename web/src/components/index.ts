@@ -5,5 +5,4 @@ export { PeakList } from './PeakList';
 export { SearchBar } from './SearchBar';
 export { FilterPanel } from './FilterPanel';
 export { Providers } from './Providers';
-export { AuthButton } from './AuthButton';
 export { SummitButton } from './SummitButton';

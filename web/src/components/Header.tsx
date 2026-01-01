@@ -3,12 +3,10 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { AuthButton } from './AuthButton';
 
 const navItems = [
   { href: '/', label: 'Peaks' },
   { href: '/map', label: 'Map' },
-  { href: '/dashboard', label: 'Dashboard' },
 ];
 
 export function Header() {
@@ -44,8 +42,13 @@ export function Header() {
             ))}
           </nav>
 
-          {/* Auth buttons */}
-          <AuthButton />
+          {/* Sign In link */}
+          <Link
+            href="/auth/signin"
+            className="text-sm font-medium text-gray-600 hover:text-gray-900"
+          >
+            Sign In
+          </Link>
         </div>
       </div>
 
