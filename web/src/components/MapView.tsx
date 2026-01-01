@@ -24,11 +24,10 @@ export function MapView({ peaks, selectedPeak, onPeakSelect, mapboxToken }: MapV
   useEffect(() => {
     if (!mapContainer.current || map.current) return;
 
-    // Use provided token or fall back to public demo
-    const token = mapboxToken || process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
+    // Use provided token or fall back to env variable or default
+    const token = mapboxToken || process.env.NEXT_PUBLIC_MAPBOX_TOKEN || 'pk.eyJ1IjoiZGFob3VzZW1vbiIsImEiOiJjbWp2cjNjc2s1dWpnM2dvd2J2aWFydjF6In0.aRFLfwOeldJyfjPvwNhRaw';
 
     if (!token) {
-      // Fallback to SVG map if no token
       return;
     }
 
@@ -155,29 +154,7 @@ export function MapView({ peaks, selectedPeak, onPeakSelect, mapboxToken }: MapV
     });
   }, [selectedPeak, mapReady]);
 
-  // Show token input if no token
-  if (!mapboxToken && !process.env.NEXT_PUBLIC_MAPBOX_TOKEN) {
-    return (
-      <div className="w-full h-full flex items-center justify-center bg-gray-100">
-        <div className="text-center p-8 max-w-md">
-          <div className="text-4xl mb-4">🗺️</div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">Mapbox Token Required</h3>
-          <p className="text-gray-600 text-sm mb-4">
-            To use the interactive map, add your Mapbox access token to the environment:
-          </p>
-          <code className="block bg-gray-800 text-green-400 text-xs p-3 rounded-lg text-left">
-            NEXT_PUBLIC_MAPBOX_TOKEN=pk.your_token_here
-          </code>
-          <p className="text-gray-500 text-xs mt-4">
-            Get a free token at{' '}
-            <a href="https://mapbox.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-              mapbox.com
-            </a>
-          </p>
-        </div>
-      </div>
-    );
-  }
+  // Token is now always available via hardcoded fallback
 
   return (
     <div ref={mapContainer} className="w-full h-full" />
