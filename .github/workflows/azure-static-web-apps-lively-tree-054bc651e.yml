@@ -34,6 +34,8 @@ jobs:
       - name: Build
         run: npm run build
         working-directory: web
+        env:
+          NEXT_PUBLIC_MAPBOX_TOKEN: ${{ secrets.NEXT_PUBLIC_MAPBOX_TOKEN }}
 
       - name: Build And Deploy
         id: builddeploy
