@@ -81,14 +81,16 @@ export function MapView({ peaks, selectedPeak, onPeakSelect, mapboxToken }: MapV
         border-radius: 50%;
         cursor: pointer;
         box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        transition: transform 0.2s;
+        transition: box-shadow 0.2s, border-color 0.2s;
       `;
 
       el.addEventListener('mouseenter', () => {
-        el.style.transform = 'scale(1.2)';
+        el.style.boxShadow = '0 0 0 4px rgba(59, 130, 246, 0.5), 0 2px 4px rgba(0,0,0,0.3)';
+        el.style.borderColor = '#3b82f6';
       });
       el.addEventListener('mouseleave', () => {
-        el.style.transform = 'scale(1)';
+        el.style.boxShadow = '0 2px 4px rgba(0,0,0,0.3)';
+        el.style.borderColor = 'white';
       });
 
       const marker = new mapboxgl.Marker({ element: el })
