@@ -1,9 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { Peak } from '@/types/peak';
 import { formatElevation, getDifficultyColor, cn } from '@/lib/utils';
+import { PeakImage } from './PeakImage';
 
 interface PeakCardProps {
   peak: Peak;
@@ -15,7 +15,7 @@ export function PeakCard({ peak, showRank = true }: PeakCardProps) {
     <Link href={`/peaks/${peak.slug}`}>
       <article className="group bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md hover:border-blue-300 transition-all duration-200">
         <div className="relative h-48 bg-gray-100">
-          <Image
+          <PeakImage
             src={peak.imageUrl}
             alt={peak.name}
             fill

@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { getAllPeaks, getPeakBySlug, getNearbyPeaks } from '@/lib/peaks';
 import { formatElevation, formatCoordinates, getDifficultyColor, getDifficultyDescription, getGoogleMapsUrl, cn } from '@/lib/utils';
+import { PeakImage } from '@/components/PeakImage';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -60,7 +60,7 @@ export default async function PeakDetailPage({ params }: PageProps) {
 
       {/* Hero image */}
       <div className="relative h-64 md:h-96 rounded-xl overflow-hidden mb-8">
-        <Image
+        <PeakImage
           src={peak.imageUrl}
           alt={peak.name}
           fill
