@@ -11,9 +11,10 @@ echo "=== Colorado 200: Session Initialization ==="
 PROJECT_DIR="${CLAUDE_PROJECT_DIR:-$(pwd)}"
 cd "$PROJECT_DIR"
 
-# Check if package.json exists (web app setup)
-if [ -f "package.json" ]; then
-    echo ">>> Checking Node.js dependencies..."
+# Check for web app directory
+if [ -d "web" ]; then
+    echo ">>> Web application detected"
+    cd web
 
     # Check if node_modules exists and is up to date
     if [ ! -d "node_modules" ]; then
@@ -26,16 +27,29 @@ if [ -f "package.json" ]; then
         echo ">>> Dependencies up to date"
     fi
 
-    # Run linting if script exists
-    if npm run --silent 2>/dev/null | grep -q "lint"; then
-        echo ">>> Running linter..."
-        npm run lint --silent || echo ">>> Linting completed with warnings"
-    fi
+    # Run linting
+    echo ">>> Running linter..."
+    npm run lint 2>/dev/null || echo ">>> Linting completed with warnings"
 
-    # Run type checking if TypeScript is configured
-    if [ -f "tsconfig.json" ]; then
-        echo ">>> Running TypeScript check..."
-        npm run typecheck --silent 2>/dev/null || npm run tsc --silent 2>/dev/null || echo ">>> TypeScript check skipped"
+    # Run type checking
+    echo ">>> Running TypeScript check..."
+    npx tsc --noEmit 2>/dev/null || echo ">>> TypeScript check completed with warnings"
+
+    cd "$PROJECT_DIR"
+fi
+
+# Check for root-level package.json
+if [ -f "package.json" ] && [ ! -d "web" ]; then
+    echo ">>> Checking Node.js dependencies..."
+
+    if [ ! -d "node_modules" ]; then
+        echo ">>> Installing dependencies..."
+        npm install
+    elif [ "package.json" -nt "node_modules" ] || [ "package-lock.json" -nt "node_modules" ]; then
+        echo ">>> Dependencies outdated, reinstalling..."
+        npm install
+    else
+        echo ">>> Dependencies up to date"
     fi
 fi
 
@@ -57,8 +71,8 @@ if [ -d ".git" ]; then
 fi
 
 # Check for environment file
-if [ ! -f ".env" ] && [ -f ".env.example" ]; then
-    echo ">>> Warning: .env file not found. Copy .env.example to .env and configure."
+if [ -f "web/.env.example" ] && [ ! -f "web/.env" ]; then
+    echo ">>> Warning: web/.env file not found. Copy web/.env.example to web/.env and configure."
 fi
 
 echo "=== Session initialization complete ==="
