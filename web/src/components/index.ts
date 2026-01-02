@@ -7,3 +7,4 @@ export { SearchBar } from './SearchBar';
 export { FilterPanel } from './FilterPanel';
 export { Providers } from './Providers';
 export { SummitButton } from './SummitButton';
+export { WeatherWidget } from './WeatherWidget';

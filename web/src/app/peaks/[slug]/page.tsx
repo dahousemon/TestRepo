@@ -4,6 +4,7 @@ import { Metadata } from 'next';
 import { getAllPeaks, getPeakBySlug, getNearbyPeaks } from '@/lib/peaks';
 import { formatElevation, formatCoordinates, getDifficultyColor, getDifficultyDescription, getGoogleMapsUrl, cn } from '@/lib/utils';
 import { PeakImage } from '@/components/PeakImage';
+import { WeatherWidget } from '@/components/WeatherWidget';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -152,6 +153,13 @@ export default async function PeakDetailPage({ params }: PageProps) {
 
         {/* Right column - Actions & Nearby */}
         <div className="space-y-6">
+          {/* Weather widget */}
+          <WeatherWidget
+            latitude={peak.latitude}
+            longitude={peak.longitude}
+            peakName={peak.name}
+          />
+
           {/* Actions card */}
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Track Your Summit</h2>

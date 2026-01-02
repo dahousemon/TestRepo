@@ -28,6 +28,11 @@ export interface PeakFilters {
   category?: PeakCategory;
   minElevation?: number;
   maxElevation?: number;
+  maxDistance?: number; // in miles
+  userLocation?: {
+    latitude: number;
+    longitude: number;
+  };
 }
 
 export interface PeakSort {

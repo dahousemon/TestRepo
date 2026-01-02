@@ -57,6 +57,21 @@ export function getUniqueRanges(): string[] {
   return Array.from(ranges).sort();
 }
 
+// Calculate distance between two coordinates in miles using Haversine formula
+export function calculateDistance(
+  lat1: number, lon1: number,
+  lat2: number, lon2: number
+): number {
+  const R = 3959; // Earth radius in miles
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+            Math.sin(dLon/2) * Math.sin(dLon/2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  return R * c;
+}
+
 export function filterPeaks(peaks: Peak[], filters: PeakFilters): Peak[] {
   return peaks.filter(peak => {
     // Search filter
@@ -80,8 +95,31 @@ export function filterPeaks(peaks: Peak[], filters: PeakFilters): Peak[] {
     if (filters.minElevation && peak.elevation < filters.minElevation) return false;
     if (filters.maxElevation && peak.elevation > filters.maxElevation) return false;
 
+    // Distance filter (Near Me)
+    if (filters.maxDistance && filters.userLocation) {
+      const distance = calculateDistance(
+        filters.userLocation.latitude,
+        filters.userLocation.longitude,
+        peak.latitude,
+        peak.longitude
+      );
+      if (distance > filters.maxDistance) return false;
+    }
+
     return true;
   });
+}
+
+// Get peaks sorted by distance from a location
+export function getPeaksByDistance(
+  peaks: Peak[],
+  userLat: number,
+  userLon: number
+): (Peak & { distance: number })[] {
+  return peaks.map(peak => ({
+    ...peak,
+    distance: calculateDistance(userLat, userLon, peak.latitude, peak.longitude)
+  })).sort((a, b) => a.distance - b.distance);
 }
 
 const difficultyOrder: Record<string, number> = {
