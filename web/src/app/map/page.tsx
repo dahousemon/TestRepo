@@ -100,11 +100,11 @@ export default function MapPage() {
           <div className="space-y-2 text-sm">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-full bg-amber-500"></div>
-              <span>Fourteener (14,000+ ft)</span>
+              <span className="text-gray-800">Fourteener (14,000+ ft)</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-full bg-sky-500"></div>
-              <span>Thirteener (13,000+ ft)</span>
+              <span className="text-gray-800">Thirteener (13,000+ ft)</span>
             </div>
           </div>
         </div>
