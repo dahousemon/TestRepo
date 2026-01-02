@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils';
 const navItems = [
   { href: '/', label: 'Peaks' },
   { href: '/map', label: 'Map' },
+  { href: '/ar', label: 'AR View' },
 ];
 
 export function Header() {
