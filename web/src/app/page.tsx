@@ -23,8 +23,8 @@ export default function HomePage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Hero section */}
       <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">
-          Colorado&apos;s 200 Highest Peaks
+        <h1 className="text-4xl font-bold text-white mb-4">
+          Colorado&apos;s <span className="text-blue-400">200</span> Highest Peaks
         </h1>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
           Explore all {stats.fourteeners} fourteeners and {stats.thirteeners} thirteeners.
