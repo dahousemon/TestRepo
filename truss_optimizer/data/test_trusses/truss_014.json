@@ -1,0 +1,480 @@
+{
+  "name": "Warren_7p_23m",
+  "nodes": [
+    {
+      "id": 0,
+      "x": 0.0,
+      "y": 0.0,
+      "support": "pin"
+    },
+    {
+      "id": 1,
+      "x": 3.2358549861401014,
+      "y": 0.0,
+      "support": "free"
+    },
+    {
+      "id": 2,
+      "x": 6.471709972280203,
+      "y": 0.0,
+      "support": "free"
+    },
+    {
+      "id": 3,
+      "x": 9.707564958420305,
+      "y": 0.0,
+      "support": "free"
+    },
+    {
+      "id": 4,
+      "x": 12.943419944560405,
+      "y": 0.0,
+      "support": "free"
+    },
+    {
+      "id": 5,
+      "x": 16.179274930700508,
+      "y": 0.0,
+      "support": "free"
+    },
+    {
+      "id": 6,
+      "x": 19.41512991684061,
+      "y": 0.0,
+      "support": "free"
+    },
+    {
+      "id": 7,
+      "x": 22.65098490298071,
+      "y": 0.0,
+      "support": "roller_x"
+    },
+    {
+      "id": 8,
+      "x": 1.6179274930700507,
+      "y": 4.823200520900763,
+      "support": "free"
+    },
+    {
+      "id": 9,
+      "x": 4.853782479210152,
+      "y": 4.823200520900763,
+      "support": "free"
+    },
+    {
+      "id": 10,
+      "x": 8.089637465350254,
+      "y": 4.823200520900763,
+      "support": "free"
+    },
+    {
+      "id": 11,
+      "x": 11.325492451490355,
+      "y": 4.823200520900763,
+      "support": "free"
+    },
+    {
+      "id": 12,
+      "x": 14.561347437630456,
+      "y": 4.823200520900763,
+      "support": "free"
+    },
+    {
+      "id": 13,
+      "x": 17.797202423770557,
+      "y": 4.823200520900763,
+      "support": "free"
+    },
+    {
+      "id": 14,
+      "x": 21.033057409910658,
+      "y": 4.823200520900763,
+      "support": "free"
+    }
+  ],
+  "elements": [
+    {
+      "id": 0,
+      "node_i": 0,
+      "node_j": 1,
+      "area": 0.005423415769433513,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 1,
+      "node_i": 1,
+      "node_j": 2,
+      "area": 0.005423415769433513,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 2,
+      "node_i": 2,
+      "node_j": 3,
+      "area": 0.005423415769433513,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 3,
+      "node_i": 3,
+      "node_j": 4,
+      "area": 0.005423415769433513,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 4,
+      "node_i": 4,
+      "node_j": 5,
+      "area": 0.005423415769433513,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 5,
+      "node_i": 5,
+      "node_j": 6,
+      "area": 0.005423415769433513,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 6,
+      "node_i": 6,
+      "node_j": 7,
+      "area": 0.005423415769433513,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 7,
+      "node_i": 0,
+      "node_j": 8,
+      "area": 0.005423415769433513,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 8,
+      "node_i": 8,
+      "node_j": 1,
+      "area": 0.005423415769433513,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 9,
+      "node_i": 1,
+      "node_j": 9,
+      "area": 0.005423415769433513,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 10,
+      "node_i": 9,
+      "node_j": 2,
+      "area": 0.005423415769433513,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 11,
+      "node_i": 2,
+      "node_j": 10,
+      "area": 0.005423415769433513,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 12,
+      "node_i": 10,
+      "node_j": 3,
+      "area": 0.005423415769433513,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 13,
+      "node_i": 3,
+      "node_j": 11,
+      "area": 0.005423415769433513,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 14,
+      "node_i": 11,
+      "node_j": 4,
+      "area": 0.005423415769433513,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 15,
+      "node_i": 4,
+      "node_j": 12,
+      "area": 0.005423415769433513,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 16,
+      "node_i": 12,
+      "node_j": 5,
+      "area": 0.005423415769433513,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 17,
+      "node_i": 5,
+      "node_j": 13,
+      "area": 0.005423415769433513,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 18,
+      "node_i": 13,
+      "node_j": 6,
+      "area": 0.005423415769433513,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 19,
+      "node_i": 6,
+      "node_j": 14,
+      "area": 0.005423415769433513,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 20,
+      "node_i": 14,
+      "node_j": 7,
+      "area": 0.005423415769433513,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 21,
+      "node_i": 8,
+      "node_j": 9,
+      "area": 0.005423415769433513,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 22,
+      "node_i": 9,
+      "node_j": 10,
+      "area": 0.005423415769433513,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 23,
+      "node_i": 10,
+      "node_j": 11,
+      "area": 0.005423415769433513,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 24,
+      "node_i": 11,
+      "node_j": 12,
+      "area": 0.005423415769433513,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 25,
+      "node_i": 12,
+      "node_j": 13,
+      "area": 0.005423415769433513,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 26,
+      "node_i": 13,
+      "node_j": 14,
+      "area": 0.005423415769433513,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    }
+  ],
+  "loads": [
+    {
+      "node_id": 1,
+      "fx": 0,
+      "fy": -269066.6928120544
+    },
+    {
+      "node_id": 2,
+      "fx": 0,
+      "fy": -269066.6928120544
+    },
+    {
+      "node_id": 3,
+      "fx": 0,
+      "fy": -269066.6928120544
+    },
+    {
+      "node_id": 4,
+      "fx": 0,
+      "fy": -269066.6928120544
+    },
+    {
+      "node_id": 5,
+      "fx": 0,
+      "fy": -269066.6928120544
+    },
+    {
+      "node_id": 6,
+      "fx": 0,
+      "fy": -269066.6928120544
+    }
+  ]
+}

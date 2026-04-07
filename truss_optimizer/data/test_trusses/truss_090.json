@@ -1,0 +1,71 @@
+{
+  "name": "Triangle_9m",
+  "nodes": [
+    {
+      "id": 0,
+      "x": 0.0,
+      "y": 0.0,
+      "support": "pin"
+    },
+    {
+      "id": 1,
+      "x": 8.88353964143791,
+      "y": 0.0,
+      "support": "roller_x"
+    },
+    {
+      "id": 2,
+      "x": 4.441769820718955,
+      "y": 4.164850598913478,
+      "support": "free"
+    }
+  ],
+  "elements": [
+    {
+      "id": 0,
+      "node_i": 0,
+      "node_j": 2,
+      "area": 0.004627715450347073,
+      "material": {
+        "name": "Steel",
+        "E": 200000000000.0,
+        "density": 7850,
+        "yield_stress": 250000000.0,
+        "cost_per_kg": 0.8
+      }
+    },
+    {
+      "id": 1,
+      "node_i": 2,
+      "node_j": 1,
+      "area": 0.004627715450347073,
+      "material": {
+        "name": "Steel",
+        "E": 200000000000.0,
+        "density": 7850,
+        "yield_stress": 250000000.0,
+        "cost_per_kg": 0.8
+      }
+    },
+    {
+      "id": 2,
+      "node_i": 0,
+      "node_j": 1,
+      "area": 0.004627715450347073,
+      "material": {
+        "name": "Steel",
+        "E": 200000000000.0,
+        "density": 7850,
+        "yield_stress": 250000000.0,
+        "cost_per_kg": 0.8
+      }
+    }
+  ],
+  "loads": [
+    {
+      "node_id": 2,
+      "fx": 0,
+      "fy": -196337.1757285954
+    }
+  ]
+}

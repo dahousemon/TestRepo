@@ -1,0 +1,71 @@
+{
+  "name": "Triangle_7m",
+  "nodes": [
+    {
+      "id": 0,
+      "x": 0.0,
+      "y": 0.0,
+      "support": "pin"
+    },
+    {
+      "id": 1,
+      "x": 7.088555899429576,
+      "y": 0.0,
+      "support": "roller_x"
+    },
+    {
+      "id": 2,
+      "x": 3.544277949714788,
+      "y": 2.769603798066556,
+      "support": "free"
+    }
+  ],
+  "elements": [
+    {
+      "id": 0,
+      "node_i": 0,
+      "node_j": 2,
+      "area": 0.002907918930229428,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 1,
+      "node_i": 2,
+      "node_j": 1,
+      "area": 0.002907918930229428,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 2,
+      "node_i": 0,
+      "node_j": 1,
+      "area": 0.002907918930229428,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    }
+  ],
+  "loads": [
+    {
+      "node_id": 2,
+      "fx": 0,
+      "fy": -172779.0861377475
+    }
+  ]
+}

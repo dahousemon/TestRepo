@@ -164,6 +164,30 @@ def cmd_multi_load(args):
         print(f"\nOptimized model saved to {args.output}")
 
 
+def cmd_genetic(args):
+    model = TrussModel.load(args.model)
+    print(f"Loaded: {model}")
+
+    from .core.genetic import GeneticOptimizer, GAConfig
+    config = GAConfig(
+        population_size=args.population,
+        generations=args.generations,
+        max_displacement=args.max_disp,
+        safety_factor=args.safety_factor,
+        allow_topology_mutation=args.topology,
+    )
+
+    optimizer = GeneticOptimizer(model, config)
+    print(f"Running genetic algorithm (pop={args.population}, gen={args.generations}, "
+          f"topology={'on' if args.topology else 'off'})...")
+    result = optimizer.optimize(verbose=args.verbose, seed=args.seed)
+    print(result.summary())
+
+    if args.output:
+        result.best_model.save(args.output)
+        print(f"\nOptimized model saved to {args.output}")
+
+
 def cmd_predict(args):
     from .ml.model import TrussPredictionModel
 
@@ -238,6 +262,21 @@ def main():
     p_multi.add_argument("--output", "-o", help="Save optimized model to path")
     p_multi.add_argument("--verbose", "-v", action="store_true")
 
+    # genetic
+    p_ga = subparsers.add_parser("genetic", help="Genetic algorithm optimization (topology + sizing)")
+    p_ga.add_argument("model", help="Path to truss model JSON file")
+    p_ga.add_argument("--population", type=int, default=60, help="Population size")
+    p_ga.add_argument("--generations", type=int, default=100, help="Max generations")
+    p_ga.add_argument("--max-disp", type=float, default=0.05)
+    p_ga.add_argument("--safety-factor", type=float, default=1.5)
+    p_ga.add_argument("--topology", action="store_true", default=True,
+                      help="Allow topology mutation (add/remove members)")
+    p_ga.add_argument("--no-topology", dest="topology", action="store_false",
+                      help="Sizing only, no topology changes")
+    p_ga.add_argument("--seed", type=int, default=42)
+    p_ga.add_argument("--output", "-o", help="Save optimized model to path")
+    p_ga.add_argument("--verbose", "-v", action="store_true")
+
     # predict
     p_pred = subparsers.add_parser("predict", help="Predict optimal areas using ML model")
     p_pred.add_argument("model", help="Path to truss model JSON")
@@ -255,6 +294,7 @@ def main():
         "compare": cmd_compare,
         "shape-opt": cmd_shape_opt,
         "multi-load": cmd_multi_load,
+        "genetic": cmd_genetic,
         "generate-data": cmd_generate_data,
         "train": cmd_train,
         "predict": cmd_predict,

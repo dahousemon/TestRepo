@@ -1,0 +1,204 @@
+{
+  "name": "Warren_3p_20m",
+  "nodes": [
+    {
+      "id": 0,
+      "x": 0.0,
+      "y": 0.0,
+      "support": "pin"
+    },
+    {
+      "id": 1,
+      "x": 6.786620331047007,
+      "y": 0.0,
+      "support": "free"
+    },
+    {
+      "id": 2,
+      "x": 13.573240662094014,
+      "y": 0.0,
+      "support": "free"
+    },
+    {
+      "id": 3,
+      "x": 20.35986099314102,
+      "y": 0.0,
+      "support": "roller_x"
+    },
+    {
+      "id": 4,
+      "x": 3.3933101655235034,
+      "y": 6.560366257291669,
+      "support": "free"
+    },
+    {
+      "id": 5,
+      "x": 10.17993049657051,
+      "y": 6.560366257291669,
+      "support": "free"
+    },
+    {
+      "id": 6,
+      "x": 16.966550827617517,
+      "y": 6.560366257291669,
+      "support": "free"
+    }
+  ],
+  "elements": [
+    {
+      "id": 0,
+      "node_i": 0,
+      "node_j": 1,
+      "area": 0.004960396821814821,
+      "material": {
+        "name": "Steel",
+        "E": 200000000000.0,
+        "density": 7850,
+        "yield_stress": 250000000.0,
+        "cost_per_kg": 0.8
+      }
+    },
+    {
+      "id": 1,
+      "node_i": 1,
+      "node_j": 2,
+      "area": 0.004960396821814821,
+      "material": {
+        "name": "Steel",
+        "E": 200000000000.0,
+        "density": 7850,
+        "yield_stress": 250000000.0,
+        "cost_per_kg": 0.8
+      }
+    },
+    {
+      "id": 2,
+      "node_i": 2,
+      "node_j": 3,
+      "area": 0.004960396821814821,
+      "material": {
+        "name": "Steel",
+        "E": 200000000000.0,
+        "density": 7850,
+        "yield_stress": 250000000.0,
+        "cost_per_kg": 0.8
+      }
+    },
+    {
+      "id": 3,
+      "node_i": 0,
+      "node_j": 4,
+      "area": 0.004960396821814821,
+      "material": {
+        "name": "Steel",
+        "E": 200000000000.0,
+        "density": 7850,
+        "yield_stress": 250000000.0,
+        "cost_per_kg": 0.8
+      }
+    },
+    {
+      "id": 4,
+      "node_i": 4,
+      "node_j": 1,
+      "area": 0.004960396821814821,
+      "material": {
+        "name": "Steel",
+        "E": 200000000000.0,
+        "density": 7850,
+        "yield_stress": 250000000.0,
+        "cost_per_kg": 0.8
+      }
+    },
+    {
+      "id": 5,
+      "node_i": 1,
+      "node_j": 5,
+      "area": 0.004960396821814821,
+      "material": {
+        "name": "Steel",
+        "E": 200000000000.0,
+        "density": 7850,
+        "yield_stress": 250000000.0,
+        "cost_per_kg": 0.8
+      }
+    },
+    {
+      "id": 6,
+      "node_i": 5,
+      "node_j": 2,
+      "area": 0.004960396821814821,
+      "material": {
+        "name": "Steel",
+        "E": 200000000000.0,
+        "density": 7850,
+        "yield_stress": 250000000.0,
+        "cost_per_kg": 0.8
+      }
+    },
+    {
+      "id": 7,
+      "node_i": 2,
+      "node_j": 6,
+      "area": 0.004960396821814821,
+      "material": {
+        "name": "Steel",
+        "E": 200000000000.0,
+        "density": 7850,
+        "yield_stress": 250000000.0,
+        "cost_per_kg": 0.8
+      }
+    },
+    {
+      "id": 8,
+      "node_i": 6,
+      "node_j": 3,
+      "area": 0.004960396821814821,
+      "material": {
+        "name": "Steel",
+        "E": 200000000000.0,
+        "density": 7850,
+        "yield_stress": 250000000.0,
+        "cost_per_kg": 0.8
+      }
+    },
+    {
+      "id": 9,
+      "node_i": 4,
+      "node_j": 5,
+      "area": 0.004960396821814821,
+      "material": {
+        "name": "Steel",
+        "E": 200000000000.0,
+        "density": 7850,
+        "yield_stress": 250000000.0,
+        "cost_per_kg": 0.8
+      }
+    },
+    {
+      "id": 10,
+      "node_i": 5,
+      "node_j": 6,
+      "area": 0.004960396821814821,
+      "material": {
+        "name": "Steel",
+        "E": 200000000000.0,
+        "density": 7850,
+        "yield_stress": 250000000.0,
+        "cost_per_kg": 0.8
+      }
+    }
+  ],
+  "loads": [
+    {
+      "node_id": 1,
+      "fx": 0,
+      "fy": -78079.70135233921
+    },
+    {
+      "node_id": 2,
+      "fx": 0,
+      "fy": -78079.70135233921
+    }
+  ]
+}

@@ -1,0 +1,512 @@
+{
+  "name": "Howe_7p_8m",
+  "nodes": [
+    {
+      "id": 0,
+      "x": 0.0,
+      "y": 0.0,
+      "support": "pin"
+    },
+    {
+      "id": 1,
+      "x": 1.1652088775775942,
+      "y": 0.0,
+      "support": "free"
+    },
+    {
+      "id": 2,
+      "x": 2.3304177551551883,
+      "y": 0.0,
+      "support": "free"
+    },
+    {
+      "id": 3,
+      "x": 3.4956266327327823,
+      "y": 0.0,
+      "support": "free"
+    },
+    {
+      "id": 4,
+      "x": 4.660835510310377,
+      "y": 0.0,
+      "support": "free"
+    },
+    {
+      "id": 5,
+      "x": 5.826044387887971,
+      "y": 0.0,
+      "support": "free"
+    },
+    {
+      "id": 6,
+      "x": 6.991253265465565,
+      "y": 0.0,
+      "support": "free"
+    },
+    {
+      "id": 7,
+      "x": 8.156462143043159,
+      "y": 0.0,
+      "support": "roller_x"
+    },
+    {
+      "id": 8,
+      "x": 0.0,
+      "y": 2.5564051104551306,
+      "support": "free"
+    },
+    {
+      "id": 9,
+      "x": 1.1652088775775942,
+      "y": 2.5564051104551306,
+      "support": "free"
+    },
+    {
+      "id": 10,
+      "x": 2.3304177551551883,
+      "y": 2.5564051104551306,
+      "support": "free"
+    },
+    {
+      "id": 11,
+      "x": 3.4956266327327823,
+      "y": 2.5564051104551306,
+      "support": "free"
+    },
+    {
+      "id": 12,
+      "x": 4.660835510310377,
+      "y": 2.5564051104551306,
+      "support": "free"
+    },
+    {
+      "id": 13,
+      "x": 5.826044387887971,
+      "y": 2.5564051104551306,
+      "support": "free"
+    },
+    {
+      "id": 14,
+      "x": 6.991253265465565,
+      "y": 2.5564051104551306,
+      "support": "free"
+    },
+    {
+      "id": 15,
+      "x": 8.156462143043159,
+      "y": 2.5564051104551306,
+      "support": "free"
+    }
+  ],
+  "elements": [
+    {
+      "id": 0,
+      "node_i": 0,
+      "node_j": 1,
+      "area": 0.0014661392586319518,
+      "material": {
+        "name": "Timber",
+        "E": 12500000000.0,
+        "density": 600,
+        "yield_stress": 40000000.0,
+        "cost_per_kg": 0.5
+      }
+    },
+    {
+      "id": 1,
+      "node_i": 1,
+      "node_j": 2,
+      "area": 0.0014661392586319518,
+      "material": {
+        "name": "Timber",
+        "E": 12500000000.0,
+        "density": 600,
+        "yield_stress": 40000000.0,
+        "cost_per_kg": 0.5
+      }
+    },
+    {
+      "id": 2,
+      "node_i": 2,
+      "node_j": 3,
+      "area": 0.0014661392586319518,
+      "material": {
+        "name": "Timber",
+        "E": 12500000000.0,
+        "density": 600,
+        "yield_stress": 40000000.0,
+        "cost_per_kg": 0.5
+      }
+    },
+    {
+      "id": 3,
+      "node_i": 3,
+      "node_j": 4,
+      "area": 0.0014661392586319518,
+      "material": {
+        "name": "Timber",
+        "E": 12500000000.0,
+        "density": 600,
+        "yield_stress": 40000000.0,
+        "cost_per_kg": 0.5
+      }
+    },
+    {
+      "id": 4,
+      "node_i": 4,
+      "node_j": 5,
+      "area": 0.0014661392586319518,
+      "material": {
+        "name": "Timber",
+        "E": 12500000000.0,
+        "density": 600,
+        "yield_stress": 40000000.0,
+        "cost_per_kg": 0.5
+      }
+    },
+    {
+      "id": 5,
+      "node_i": 5,
+      "node_j": 6,
+      "area": 0.0014661392586319518,
+      "material": {
+        "name": "Timber",
+        "E": 12500000000.0,
+        "density": 600,
+        "yield_stress": 40000000.0,
+        "cost_per_kg": 0.5
+      }
+    },
+    {
+      "id": 6,
+      "node_i": 6,
+      "node_j": 7,
+      "area": 0.0014661392586319518,
+      "material": {
+        "name": "Timber",
+        "E": 12500000000.0,
+        "density": 600,
+        "yield_stress": 40000000.0,
+        "cost_per_kg": 0.5
+      }
+    },
+    {
+      "id": 7,
+      "node_i": 8,
+      "node_j": 9,
+      "area": 0.0014661392586319518,
+      "material": {
+        "name": "Timber",
+        "E": 12500000000.0,
+        "density": 600,
+        "yield_stress": 40000000.0,
+        "cost_per_kg": 0.5
+      }
+    },
+    {
+      "id": 8,
+      "node_i": 9,
+      "node_j": 10,
+      "area": 0.0014661392586319518,
+      "material": {
+        "name": "Timber",
+        "E": 12500000000.0,
+        "density": 600,
+        "yield_stress": 40000000.0,
+        "cost_per_kg": 0.5
+      }
+    },
+    {
+      "id": 9,
+      "node_i": 10,
+      "node_j": 11,
+      "area": 0.0014661392586319518,
+      "material": {
+        "name": "Timber",
+        "E": 12500000000.0,
+        "density": 600,
+        "yield_stress": 40000000.0,
+        "cost_per_kg": 0.5
+      }
+    },
+    {
+      "id": 10,
+      "node_i": 11,
+      "node_j": 12,
+      "area": 0.0014661392586319518,
+      "material": {
+        "name": "Timber",
+        "E": 12500000000.0,
+        "density": 600,
+        "yield_stress": 40000000.0,
+        "cost_per_kg": 0.5
+      }
+    },
+    {
+      "id": 11,
+      "node_i": 12,
+      "node_j": 13,
+      "area": 0.0014661392586319518,
+      "material": {
+        "name": "Timber",
+        "E": 12500000000.0,
+        "density": 600,
+        "yield_stress": 40000000.0,
+        "cost_per_kg": 0.5
+      }
+    },
+    {
+      "id": 12,
+      "node_i": 13,
+      "node_j": 14,
+      "area": 0.0014661392586319518,
+      "material": {
+        "name": "Timber",
+        "E": 12500000000.0,
+        "density": 600,
+        "yield_stress": 40000000.0,
+        "cost_per_kg": 0.5
+      }
+    },
+    {
+      "id": 13,
+      "node_i": 14,
+      "node_j": 15,
+      "area": 0.0014661392586319518,
+      "material": {
+        "name": "Timber",
+        "E": 12500000000.0,
+        "density": 600,
+        "yield_stress": 40000000.0,
+        "cost_per_kg": 0.5
+      }
+    },
+    {
+      "id": 14,
+      "node_i": 0,
+      "node_j": 8,
+      "area": 0.0014661392586319518,
+      "material": {
+        "name": "Timber",
+        "E": 12500000000.0,
+        "density": 600,
+        "yield_stress": 40000000.0,
+        "cost_per_kg": 0.5
+      }
+    },
+    {
+      "id": 15,
+      "node_i": 1,
+      "node_j": 9,
+      "area": 0.0014661392586319518,
+      "material": {
+        "name": "Timber",
+        "E": 12500000000.0,
+        "density": 600,
+        "yield_stress": 40000000.0,
+        "cost_per_kg": 0.5
+      }
+    },
+    {
+      "id": 16,
+      "node_i": 2,
+      "node_j": 10,
+      "area": 0.0014661392586319518,
+      "material": {
+        "name": "Timber",
+        "E": 12500000000.0,
+        "density": 600,
+        "yield_stress": 40000000.0,
+        "cost_per_kg": 0.5
+      }
+    },
+    {
+      "id": 17,
+      "node_i": 3,
+      "node_j": 11,
+      "area": 0.0014661392586319518,
+      "material": {
+        "name": "Timber",
+        "E": 12500000000.0,
+        "density": 600,
+        "yield_stress": 40000000.0,
+        "cost_per_kg": 0.5
+      }
+    },
+    {
+      "id": 18,
+      "node_i": 4,
+      "node_j": 12,
+      "area": 0.0014661392586319518,
+      "material": {
+        "name": "Timber",
+        "E": 12500000000.0,
+        "density": 600,
+        "yield_stress": 40000000.0,
+        "cost_per_kg": 0.5
+      }
+    },
+    {
+      "id": 19,
+      "node_i": 5,
+      "node_j": 13,
+      "area": 0.0014661392586319518,
+      "material": {
+        "name": "Timber",
+        "E": 12500000000.0,
+        "density": 600,
+        "yield_stress": 40000000.0,
+        "cost_per_kg": 0.5
+      }
+    },
+    {
+      "id": 20,
+      "node_i": 6,
+      "node_j": 14,
+      "area": 0.0014661392586319518,
+      "material": {
+        "name": "Timber",
+        "E": 12500000000.0,
+        "density": 600,
+        "yield_stress": 40000000.0,
+        "cost_per_kg": 0.5
+      }
+    },
+    {
+      "id": 21,
+      "node_i": 7,
+      "node_j": 15,
+      "area": 0.0014661392586319518,
+      "material": {
+        "name": "Timber",
+        "E": 12500000000.0,
+        "density": 600,
+        "yield_stress": 40000000.0,
+        "cost_per_kg": 0.5
+      }
+    },
+    {
+      "id": 22,
+      "node_i": 1,
+      "node_j": 8,
+      "area": 0.0014661392586319518,
+      "material": {
+        "name": "Timber",
+        "E": 12500000000.0,
+        "density": 600,
+        "yield_stress": 40000000.0,
+        "cost_per_kg": 0.5
+      }
+    },
+    {
+      "id": 23,
+      "node_i": 2,
+      "node_j": 9,
+      "area": 0.0014661392586319518,
+      "material": {
+        "name": "Timber",
+        "E": 12500000000.0,
+        "density": 600,
+        "yield_stress": 40000000.0,
+        "cost_per_kg": 0.5
+      }
+    },
+    {
+      "id": 24,
+      "node_i": 3,
+      "node_j": 10,
+      "area": 0.0014661392586319518,
+      "material": {
+        "name": "Timber",
+        "E": 12500000000.0,
+        "density": 600,
+        "yield_stress": 40000000.0,
+        "cost_per_kg": 0.5
+      }
+    },
+    {
+      "id": 25,
+      "node_i": 4,
+      "node_j": 11,
+      "area": 0.0014661392586319518,
+      "material": {
+        "name": "Timber",
+        "E": 12500000000.0,
+        "density": 600,
+        "yield_stress": 40000000.0,
+        "cost_per_kg": 0.5
+      }
+    },
+    {
+      "id": 26,
+      "node_i": 4,
+      "node_j": 13,
+      "area": 0.0014661392586319518,
+      "material": {
+        "name": "Timber",
+        "E": 12500000000.0,
+        "density": 600,
+        "yield_stress": 40000000.0,
+        "cost_per_kg": 0.5
+      }
+    },
+    {
+      "id": 27,
+      "node_i": 5,
+      "node_j": 14,
+      "area": 0.0014661392586319518,
+      "material": {
+        "name": "Timber",
+        "E": 12500000000.0,
+        "density": 600,
+        "yield_stress": 40000000.0,
+        "cost_per_kg": 0.5
+      }
+    },
+    {
+      "id": 28,
+      "node_i": 6,
+      "node_j": 15,
+      "area": 0.0014661392586319518,
+      "material": {
+        "name": "Timber",
+        "E": 12500000000.0,
+        "density": 600,
+        "yield_stress": 40000000.0,
+        "cost_per_kg": 0.5
+      }
+    }
+  ],
+  "loads": [
+    {
+      "node_id": 1,
+      "fx": 0,
+      "fy": -100322.9443769937
+    },
+    {
+      "node_id": 2,
+      "fx": 0,
+      "fy": -100322.9443769937
+    },
+    {
+      "node_id": 3,
+      "fx": 0,
+      "fy": -100322.9443769937
+    },
+    {
+      "node_id": 4,
+      "fx": 0,
+      "fy": -100322.9443769937
+    },
+    {
+      "node_id": 5,
+      "fx": 0,
+      "fy": -100322.9443769937
+    },
+    {
+      "node_id": 6,
+      "fx": 0,
+      "fy": -100322.9443769937
+    }
+  ]
+}

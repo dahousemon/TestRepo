@@ -1,0 +1,273 @@
+{
+  "name": "Warren_4p_9m",
+  "nodes": [
+    {
+      "id": 0,
+      "x": 0.0,
+      "y": 0.0,
+      "support": "pin"
+    },
+    {
+      "id": 1,
+      "x": 2.2761618453691597,
+      "y": 0.0,
+      "support": "free"
+    },
+    {
+      "id": 2,
+      "x": 4.552323690738319,
+      "y": 0.0,
+      "support": "free"
+    },
+    {
+      "id": 3,
+      "x": 6.828485536107479,
+      "y": 0.0,
+      "support": "free"
+    },
+    {
+      "id": 4,
+      "x": 9.104647381476639,
+      "y": 0.0,
+      "support": "roller_x"
+    },
+    {
+      "id": 5,
+      "x": 1.1380809226845798,
+      "y": 2.0566587060586614,
+      "support": "free"
+    },
+    {
+      "id": 6,
+      "x": 3.4142427680537395,
+      "y": 2.0566587060586614,
+      "support": "free"
+    },
+    {
+      "id": 7,
+      "x": 5.690404613422899,
+      "y": 2.0566587060586614,
+      "support": "free"
+    },
+    {
+      "id": 8,
+      "x": 7.966566458792059,
+      "y": 2.0566587060586614,
+      "support": "free"
+    }
+  ],
+  "elements": [
+    {
+      "id": 0,
+      "node_i": 0,
+      "node_j": 1,
+      "area": 0.004423071254949373,
+      "material": {
+        "name": "Steel",
+        "E": 200000000000.0,
+        "density": 7850,
+        "yield_stress": 250000000.0,
+        "cost_per_kg": 0.8
+      }
+    },
+    {
+      "id": 1,
+      "node_i": 1,
+      "node_j": 2,
+      "area": 0.004423071254949373,
+      "material": {
+        "name": "Steel",
+        "E": 200000000000.0,
+        "density": 7850,
+        "yield_stress": 250000000.0,
+        "cost_per_kg": 0.8
+      }
+    },
+    {
+      "id": 2,
+      "node_i": 2,
+      "node_j": 3,
+      "area": 0.004423071254949373,
+      "material": {
+        "name": "Steel",
+        "E": 200000000000.0,
+        "density": 7850,
+        "yield_stress": 250000000.0,
+        "cost_per_kg": 0.8
+      }
+    },
+    {
+      "id": 3,
+      "node_i": 3,
+      "node_j": 4,
+      "area": 0.004423071254949373,
+      "material": {
+        "name": "Steel",
+        "E": 200000000000.0,
+        "density": 7850,
+        "yield_stress": 250000000.0,
+        "cost_per_kg": 0.8
+      }
+    },
+    {
+      "id": 4,
+      "node_i": 0,
+      "node_j": 5,
+      "area": 0.004423071254949373,
+      "material": {
+        "name": "Steel",
+        "E": 200000000000.0,
+        "density": 7850,
+        "yield_stress": 250000000.0,
+        "cost_per_kg": 0.8
+      }
+    },
+    {
+      "id": 5,
+      "node_i": 5,
+      "node_j": 1,
+      "area": 0.004423071254949373,
+      "material": {
+        "name": "Steel",
+        "E": 200000000000.0,
+        "density": 7850,
+        "yield_stress": 250000000.0,
+        "cost_per_kg": 0.8
+      }
+    },
+    {
+      "id": 6,
+      "node_i": 1,
+      "node_j": 6,
+      "area": 0.004423071254949373,
+      "material": {
+        "name": "Steel",
+        "E": 200000000000.0,
+        "density": 7850,
+        "yield_stress": 250000000.0,
+        "cost_per_kg": 0.8
+      }
+    },
+    {
+      "id": 7,
+      "node_i": 6,
+      "node_j": 2,
+      "area": 0.004423071254949373,
+      "material": {
+        "name": "Steel",
+        "E": 200000000000.0,
+        "density": 7850,
+        "yield_stress": 250000000.0,
+        "cost_per_kg": 0.8
+      }
+    },
+    {
+      "id": 8,
+      "node_i": 2,
+      "node_j": 7,
+      "area": 0.004423071254949373,
+      "material": {
+        "name": "Steel",
+        "E": 200000000000.0,
+        "density": 7850,
+        "yield_stress": 250000000.0,
+        "cost_per_kg": 0.8
+      }
+    },
+    {
+      "id": 9,
+      "node_i": 7,
+      "node_j": 3,
+      "area": 0.004423071254949373,
+      "material": {
+        "name": "Steel",
+        "E": 200000000000.0,
+        "density": 7850,
+        "yield_stress": 250000000.0,
+        "cost_per_kg": 0.8
+      }
+    },
+    {
+      "id": 10,
+      "node_i": 3,
+      "node_j": 8,
+      "area": 0.004423071254949373,
+      "material": {
+        "name": "Steel",
+        "E": 200000000000.0,
+        "density": 7850,
+        "yield_stress": 250000000.0,
+        "cost_per_kg": 0.8
+      }
+    },
+    {
+      "id": 11,
+      "node_i": 8,
+      "node_j": 4,
+      "area": 0.004423071254949373,
+      "material": {
+        "name": "Steel",
+        "E": 200000000000.0,
+        "density": 7850,
+        "yield_stress": 250000000.0,
+        "cost_per_kg": 0.8
+      }
+    },
+    {
+      "id": 12,
+      "node_i": 5,
+      "node_j": 6,
+      "area": 0.004423071254949373,
+      "material": {
+        "name": "Steel",
+        "E": 200000000000.0,
+        "density": 7850,
+        "yield_stress": 250000000.0,
+        "cost_per_kg": 0.8
+      }
+    },
+    {
+      "id": 13,
+      "node_i": 6,
+      "node_j": 7,
+      "area": 0.004423071254949373,
+      "material": {
+        "name": "Steel",
+        "E": 200000000000.0,
+        "density": 7850,
+        "yield_stress": 250000000.0,
+        "cost_per_kg": 0.8
+      }
+    },
+    {
+      "id": 14,
+      "node_i": 7,
+      "node_j": 8,
+      "area": 0.004423071254949373,
+      "material": {
+        "name": "Steel",
+        "E": 200000000000.0,
+        "density": 7850,
+        "yield_stress": 250000000.0,
+        "cost_per_kg": 0.8
+      }
+    }
+  ],
+  "loads": [
+    {
+      "node_id": 1,
+      "fx": 0,
+      "fy": -396018.87324190617
+    },
+    {
+      "node_id": 2,
+      "fx": 0,
+      "fy": -396018.87324190617
+    },
+    {
+      "node_id": 3,
+      "fx": 0,
+      "fy": -396018.87324190617
+    }
+  ]
+}

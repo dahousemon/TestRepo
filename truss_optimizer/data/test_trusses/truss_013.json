@@ -1,0 +1,204 @@
+{
+  "name": "Warren_3p_10m",
+  "nodes": [
+    {
+      "id": 0,
+      "x": 0.0,
+      "y": 0.0,
+      "support": "pin"
+    },
+    {
+      "id": 1,
+      "x": 3.4506377891059947,
+      "y": 0.0,
+      "support": "free"
+    },
+    {
+      "id": 2,
+      "x": 6.9012755782119894,
+      "y": 0.0,
+      "support": "free"
+    },
+    {
+      "id": 3,
+      "x": 10.351913367317984,
+      "y": 0.0,
+      "support": "roller_x"
+    },
+    {
+      "id": 4,
+      "x": 1.7253188945529974,
+      "y": 1.6192467938905728,
+      "support": "free"
+    },
+    {
+      "id": 5,
+      "x": 5.175956683658992,
+      "y": 1.6192467938905728,
+      "support": "free"
+    },
+    {
+      "id": 6,
+      "x": 8.626594472764987,
+      "y": 1.6192467938905728,
+      "support": "free"
+    }
+  ],
+  "elements": [
+    {
+      "id": 0,
+      "node_i": 0,
+      "node_j": 1,
+      "area": 0.0013309430260577363,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 1,
+      "node_i": 1,
+      "node_j": 2,
+      "area": 0.0013309430260577363,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 2,
+      "node_i": 2,
+      "node_j": 3,
+      "area": 0.0013309430260577363,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 3,
+      "node_i": 0,
+      "node_j": 4,
+      "area": 0.0013309430260577363,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 4,
+      "node_i": 4,
+      "node_j": 1,
+      "area": 0.0013309430260577363,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 5,
+      "node_i": 1,
+      "node_j": 5,
+      "area": 0.0013309430260577363,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 6,
+      "node_i": 5,
+      "node_j": 2,
+      "area": 0.0013309430260577363,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 7,
+      "node_i": 2,
+      "node_j": 6,
+      "area": 0.0013309430260577363,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 8,
+      "node_i": 6,
+      "node_j": 3,
+      "area": 0.0013309430260577363,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 9,
+      "node_i": 4,
+      "node_j": 5,
+      "area": 0.0013309430260577363,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    },
+    {
+      "id": 10,
+      "node_i": 5,
+      "node_j": 6,
+      "area": 0.0013309430260577363,
+      "material": {
+        "name": "Aluminum",
+        "E": 69000000000.0,
+        "density": 2700,
+        "yield_stress": 270000000.0,
+        "cost_per_kg": 2.5
+      }
+    }
+  ],
+  "loads": [
+    {
+      "node_id": 1,
+      "fx": 0,
+      "fy": -139872.15826245112
+    },
+    {
+      "node_id": 2,
+      "fx": 0,
+      "fy": -139872.15826245112
+    }
+  ]
+}
