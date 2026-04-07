@@ -82,6 +82,28 @@ def cmd_train(args):
     print(f"\nModel saved to {args.output}")
 
 
+def cmd_compare(args):
+    model = TrussModel.load(args.model)
+    print(f"Loaded: {model}")
+
+    from .core.optimizer import TrussComparison
+    constraints = OptimizationConstraints(
+        max_displacement=args.max_disp,
+        safety_factor=args.safety_factor,
+    )
+
+    comparison = TrussComparison(model, constraints)
+
+    print("Running weight vs cost comparison...")
+    result = comparison.compare(verbose=args.verbose)
+    print(result.summary())
+
+    if args.pareto:
+        print(f"\nGenerating Pareto front ({args.pareto_points} points)...")
+        points = comparison.pareto_front(n_points=args.pareto_points)
+        print(TrussComparison.pareto_summary(points))
+
+
 def cmd_predict(args):
     from .ml.model import TrussPredictionModel
 
@@ -127,6 +149,15 @@ def main():
     p_train.add_argument("--layers", type=int, nargs="+", default=[128, 64, 32])
     p_train.add_argument("--max-iter", type=int, default=1000)
 
+    # compare
+    p_cmp = subparsers.add_parser("compare", help="Compare cost vs weight optimization")
+    p_cmp.add_argument("model", help="Path to truss model JSON file")
+    p_cmp.add_argument("--max-disp", type=float, default=0.05)
+    p_cmp.add_argument("--safety-factor", type=float, default=1.5)
+    p_cmp.add_argument("--pareto", action="store_true", help="Also generate Pareto front")
+    p_cmp.add_argument("--pareto-points", type=int, default=11)
+    p_cmp.add_argument("--verbose", "-v", action="store_true")
+
     # predict
     p_pred = subparsers.add_parser("predict", help="Predict optimal areas using ML model")
     p_pred.add_argument("model", help="Path to truss model JSON")
@@ -141,6 +172,7 @@ def main():
     commands = {
         "analyze": cmd_analyze,
         "optimize": cmd_optimize,
+        "compare": cmd_compare,
         "generate-data": cmd_generate_data,
         "train": cmd_train,
         "predict": cmd_predict,

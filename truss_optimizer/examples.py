@@ -151,6 +151,68 @@ def example_roof_truss():
     return model, result, opt_result
 
 
+def example_cost_vs_weight():
+    """Compare cost vs weight optimization on the same bridge truss."""
+    print("\n" + "=" * 60)
+    print("Example: Cost vs Weight Comparison")
+    print("=" * 60)
+
+    from .core.optimizer import TrussComparison
+
+    steel = Material.steel()
+    model = TrussModel("Cost vs Weight Bridge")
+
+    # 8-node bridge with mixed materials to make cost/weight tradeoff interesting
+    model.add_node(0, 0.0, 0.0, SupportType.PIN)
+    model.add_node(1, 3.0, 0.0)
+    model.add_node(2, 6.0, 0.0)
+    model.add_node(3, 9.0, 0.0, SupportType.ROLLER_X)
+    model.add_node(4, 1.5, 2.5)
+    model.add_node(5, 4.5, 2.5)
+    model.add_node(6, 7.5, 2.5)
+
+    area = 40e-4
+    aluminum = Material.aluminum()
+
+    # Bottom chord (steel - cheap but heavy)
+    model.add_element(0, 0, 1, area, steel)
+    model.add_element(1, 1, 2, area, steel)
+    model.add_element(2, 2, 3, area, steel)
+    # Top chord (aluminum - light but expensive)
+    model.add_element(3, 4, 5, area, aluminum)
+    model.add_element(4, 5, 6, area, aluminum)
+    # Diagonals (steel)
+    model.add_element(5, 0, 4, area, steel)
+    model.add_element(6, 4, 1, area, steel)
+    model.add_element(7, 1, 5, area, steel)
+    model.add_element(8, 5, 2, area, steel)
+    model.add_element(9, 2, 6, area, steel)
+    model.add_element(10, 6, 3, area, steel)
+
+    model.add_load(1, 0, -80e3)
+    model.add_load(2, 0, -80e3)
+
+    # Run comparison
+    constraints = OptimizationConstraints(
+        max_displacement=0.03,
+        safety_factor=1.5,
+        min_area=1e-4,
+        max_area=0.05,
+    )
+    comparison = TrussComparison(model, constraints)
+
+    print("\nRunning weight vs cost optimization...")
+    result = comparison.compare()
+    print(result.summary())
+
+    # Pareto front
+    print("\nGenerating Pareto front (7 points)...")
+    points = comparison.pareto_front(n_points=7)
+    print(TrussComparison.pareto_summary(points))
+
+    return result, points
+
+
 def example_ml_pipeline():
     """Demonstrate the ML training and prediction pipeline."""
     print("\n" + "=" * 60)
@@ -184,6 +246,7 @@ def example_ml_pipeline():
 if __name__ == "__main__":
     example_simple_bridge()
     example_roof_truss()
+    example_cost_vs_weight()
     try:
         example_ml_pipeline()
     except ImportError as e:

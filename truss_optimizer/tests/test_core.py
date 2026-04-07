@@ -10,6 +10,7 @@ from truss_optimizer.core.truss_model import (
 from truss_optimizer.core.analysis import TrussAnalyzer
 from truss_optimizer.core.optimizer import (
     TrussOptimizer, ObjectiveType, OptimizationConstraints,
+    TrussComparison, ComparisonResult,
 )
 
 
@@ -240,3 +241,71 @@ class TestOptimizer:
         summary = result.summary()
         assert "Weight:" in summary
         assert "Cost:" in summary
+
+
+class TestComparison:
+    def test_compare_returns_both_results(self):
+        model = make_bridge_truss()
+        constraints = OptimizationConstraints(
+            max_displacement=0.1,
+            safety_factor=1.2,
+            min_area=1e-4,
+            max_area=0.05,
+        )
+        comparison = TrussComparison(model, constraints)
+        result = comparison.compare(max_iterations=50)
+
+        assert isinstance(result, ComparisonResult)
+        assert result.weight_result.final_weight > 0
+        assert result.cost_result.final_cost > 0
+        assert result.initial_analysis.total_weight > 0
+
+    def test_comparison_summary_has_all_sections(self):
+        model = make_simple_truss()
+        constraints = OptimizationConstraints(
+            max_displacement=0.1,
+            safety_factor=1.2,
+            min_area=1e-4,
+            max_area=0.05,
+        )
+        comparison = TrussComparison(model, constraints)
+        result = comparison.compare(max_iterations=50)
+        summary = result.summary()
+
+        assert "COST vs WEIGHT" in summary
+        assert "Weight (kg)" in summary
+        assert "Cost ($)" in summary
+        assert "Max Displacement" in summary
+        assert "Max Stress" in summary
+
+    def test_pareto_front_generates_points(self):
+        model = make_simple_truss()
+        constraints = OptimizationConstraints(
+            max_displacement=0.1,
+            safety_factor=1.2,
+            min_area=1e-4,
+            max_area=0.05,
+        )
+        comparison = TrussComparison(model, constraints)
+        points = comparison.pareto_front(n_points=5, max_iterations=50)
+
+        assert len(points) > 0
+        # First point (alpha=0) should favor cost, last (alpha=1) should favor weight
+        for p in points:
+            assert p.weight > 0
+            assert p.cost > 0
+            assert 0.0 <= p.alpha <= 1.0
+
+    def test_pareto_summary_string(self):
+        model = make_simple_truss()
+        constraints = OptimizationConstraints(
+            max_displacement=0.1,
+            safety_factor=1.2,
+            min_area=1e-4,
+            max_area=0.05,
+        )
+        comparison = TrussComparison(model, constraints)
+        points = comparison.pareto_front(n_points=3, max_iterations=30)
+        summary = TrussComparison.pareto_summary(points)
+        assert "PARETO FRONT" in summary
+        assert "Alpha" in summary
