@@ -243,10 +243,149 @@ def example_ml_pipeline():
     print("\nModel saved to truss_optimizer/data/truss_predictor.pkl")
 
 
+def example_shape_optimization():
+    """Demonstrate shape optimization: move nodes + size members for min cost."""
+    print("\n" + "=" * 60)
+    print("Example: Shape Optimization (Min Cost)")
+    print("=" * 60)
+
+    from .core.advanced import ShapeOptimizer, ShapeOptConstraints
+
+    steel = Material.steel()
+    model = TrussModel("Shape Opt Bridge")
+
+    # Simple bridge: bottom chord fixed, top chord nodes can move
+    model.add_node(0, 0.0, 0.0, SupportType.PIN)
+    model.add_node(1, 4.0, 0.0)
+    model.add_node(2, 8.0, 0.0)
+    model.add_node(3, 12.0, 0.0, SupportType.ROLLER_X)
+    model.add_node(4, 4.0, 3.0)   # free - can move
+    model.add_node(5, 8.0, 3.0)   # free - can move
+
+    area = 40e-4
+    model.add_element(0, 0, 1, area, steel)
+    model.add_element(1, 1, 2, area, steel)
+    model.add_element(2, 2, 3, area, steel)
+    model.add_element(3, 0, 4, area, steel)
+    model.add_element(4, 4, 2, area, steel)
+    model.add_element(5, 1, 5, area, steel)
+    model.add_element(6, 5, 3, area, steel)
+    model.add_element(7, 4, 5, area, steel)
+    model.add_element(8, 4, 1, area, steel)
+    model.add_element(9, 5, 2, area, steel)
+
+    model.add_load(1, 0, -100e3)
+    model.add_load(2, 0, -100e3)
+
+    print(f"\nInitial design: cost=${model.total_cost:.2f}, weight={model.total_weight:.2f} kg")
+    print(f"Initial node 4 position: ({model.nodes[4].x}, {model.nodes[4].y})")
+    print(f"Initial node 5 position: ({model.nodes[5].x}, {model.nodes[5].y})")
+
+    constraints = ShapeOptConstraints(
+        max_displacement=0.03,
+        safety_factor=1.5,
+        min_area=1e-4,
+        max_area=0.05,
+        max_node_move_x=3.0,
+        max_node_move_y=2.0,
+        min_height=1.0,
+    )
+
+    optimizer = ShapeOptimizer(model, constraints)
+    result = optimizer.optimize(max_iterations=300)
+    print(result.summary())
+
+    return result
+
+
+def example_multi_load_case():
+    """Demonstrate multi-load-case optimization: dead + wind + live."""
+    print("\n" + "=" * 60)
+    print("Example: Multi-Load-Case Optimization (Min Cost)")
+    print("=" * 60)
+
+    from .core.advanced import MultiLoadCaseOptimizer, MultiLoadConstraints, LoadCase
+    from .core.truss_model import Load
+
+    steel = Material.steel()
+    model = TrussModel("Multi-Load Bridge")
+
+    model.add_node(0, 0.0, 0.0, SupportType.PIN)
+    model.add_node(1, 4.0, 0.0)
+    model.add_node(2, 8.0, 0.0)
+    model.add_node(3, 12.0, 0.0, SupportType.ROLLER_X)
+    model.add_node(4, 4.0, 3.0)
+    model.add_node(5, 8.0, 3.0)
+
+    area = 40e-4
+    model.add_element(0, 0, 1, area, steel)
+    model.add_element(1, 1, 2, area, steel)
+    model.add_element(2, 2, 3, area, steel)
+    model.add_element(3, 0, 4, area, steel)
+    model.add_element(4, 4, 2, area, steel)
+    model.add_element(5, 1, 5, area, steel)
+    model.add_element(6, 5, 3, area, steel)
+    model.add_element(7, 4, 5, area, steel)
+    model.add_element(8, 4, 1, area, steel)
+    model.add_element(9, 5, 2, area, steel)
+
+    # Placeholder load for validation
+    model.add_load(1, 0, -50e3)
+
+    # Define load cases
+    load_cases = [
+        LoadCase("1.4D (Dead Only)", [
+            Load(1, 0, -70e3),
+            Load(2, 0, -70e3),
+        ]),
+        LoadCase("1.2D + 1.6L", [
+            Load(1, 0, -60e3 + -128e3),   # dead + live
+            Load(2, 0, -60e3 + -128e3),
+        ]),
+        LoadCase("1.2D + W (Left)", [
+            Load(1, 0, -60e3),
+            Load(2, 0, -60e3),
+            Load(4, 30e3, -10e3),   # wind on top chord
+            Load(5, 30e3, -10e3),
+        ]),
+        LoadCase("1.2D + W (Right)", [
+            Load(1, 0, -60e3),
+            Load(2, 0, -60e3),
+            Load(4, -30e3, -10e3),  # wind from other direction
+            Load(5, -30e3, -10e3),
+        ]),
+        LoadCase("0.9D + W (Uplift)", [
+            Load(1, 0, -45e3),
+            Load(2, 0, -45e3),
+            Load(4, 30e3, 15e3),    # wind uplift
+            Load(5, 30e3, 15e3),
+        ]),
+    ]
+
+    print(f"\nLoad cases: {len(load_cases)}")
+    for lc in load_cases:
+        print(f"  - {lc.name}: {len(lc.loads)} loads")
+
+    constraints = MultiLoadConstraints(
+        max_displacement=0.03,
+        safety_factor=1.5,
+        min_area=1e-4,
+        max_area=0.05,
+    )
+
+    optimizer = MultiLoadCaseOptimizer(model, load_cases, constraints)
+    result = optimizer.optimize(max_iterations=300)
+    print(result.summary())
+
+    return result
+
+
 if __name__ == "__main__":
     example_simple_bridge()
     example_roof_truss()
     example_cost_vs_weight()
+    example_shape_optimization()
+    example_multi_load_case()
     try:
         example_ml_pipeline()
     except ImportError as e:

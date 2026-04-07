@@ -104,6 +104,66 @@ def cmd_compare(args):
         print(TrussComparison.pareto_summary(points))
 
 
+def cmd_shape_opt(args):
+    model = TrussModel.load(args.model)
+    print(f"Loaded: {model}")
+
+    from .core.advanced import ShapeOptimizer, ShapeOptConstraints
+    constraints = ShapeOptConstraints(
+        max_displacement=args.max_disp,
+        safety_factor=args.safety_factor,
+        max_node_move_x=args.max_move_x,
+        max_node_move_y=args.max_move_y,
+        min_height=args.min_height,
+    )
+
+    optimizer = ShapeOptimizer(model, constraints)
+    print("Running shape optimization (min cost, moving nodes + sizing)...")
+    result = optimizer.optimize(verbose=args.verbose)
+    print(result.summary())
+
+    if args.output:
+        result.optimized_model.save(args.output)
+        print(f"\nOptimized model saved to {args.output}")
+
+
+def cmd_multi_load(args):
+    import json
+    model = TrussModel.load(args.model)
+    print(f"Loaded: {model}")
+
+    from .core.advanced import MultiLoadCaseOptimizer, MultiLoadConstraints, LoadCase
+    from .core.truss_model import Load
+
+    # Load cases from JSON file
+    with open(args.load_cases) as f:
+        cases_data = json.load(f)
+
+    load_cases = []
+    for case in cases_data:
+        loads = [Load(node_id=l["node_id"], fx=l.get("fx", 0), fy=l.get("fy", 0))
+                 for l in case["loads"]]
+        load_cases.append(LoadCase(case["name"], loads))
+
+    print(f"Load cases: {len(load_cases)}")
+    for lc in load_cases:
+        print(f"  - {lc.name}: {len(lc.loads)} loads")
+
+    constraints = MultiLoadConstraints(
+        max_displacement=args.max_disp,
+        safety_factor=args.safety_factor,
+    )
+
+    optimizer = MultiLoadCaseOptimizer(model, load_cases, constraints)
+    print("Running multi-load-case optimization (min cost)...")
+    result = optimizer.optimize(verbose=args.verbose)
+    print(result.summary())
+
+    if args.output:
+        result.optimized_model.save(args.output)
+        print(f"\nOptimized model saved to {args.output}")
+
+
 def cmd_predict(args):
     from .ml.model import TrussPredictionModel
 
@@ -158,6 +218,26 @@ def main():
     p_cmp.add_argument("--pareto-points", type=int, default=11)
     p_cmp.add_argument("--verbose", "-v", action="store_true")
 
+    # shape-opt
+    p_shape = subparsers.add_parser("shape-opt", help="Shape optimization (move nodes + size for min cost)")
+    p_shape.add_argument("model", help="Path to truss model JSON file")
+    p_shape.add_argument("--max-disp", type=float, default=0.05)
+    p_shape.add_argument("--safety-factor", type=float, default=1.5)
+    p_shape.add_argument("--max-move-x", type=float, default=2.0, help="Max node movement in x (m)")
+    p_shape.add_argument("--max-move-y", type=float, default=2.0, help="Max node movement in y (m)")
+    p_shape.add_argument("--min-height", type=float, default=0.5, help="Minimum truss height (m)")
+    p_shape.add_argument("--output", "-o", help="Save optimized model to path")
+    p_shape.add_argument("--verbose", "-v", action="store_true")
+
+    # multi-load
+    p_multi = subparsers.add_parser("multi-load", help="Multi-load-case optimization (min cost)")
+    p_multi.add_argument("model", help="Path to truss model JSON file")
+    p_multi.add_argument("load_cases", help="Path to load cases JSON file")
+    p_multi.add_argument("--max-disp", type=float, default=0.05)
+    p_multi.add_argument("--safety-factor", type=float, default=1.5)
+    p_multi.add_argument("--output", "-o", help="Save optimized model to path")
+    p_multi.add_argument("--verbose", "-v", action="store_true")
+
     # predict
     p_pred = subparsers.add_parser("predict", help="Predict optimal areas using ML model")
     p_pred.add_argument("model", help="Path to truss model JSON")
@@ -173,6 +253,8 @@ def main():
         "analyze": cmd_analyze,
         "optimize": cmd_optimize,
         "compare": cmd_compare,
+        "shape-opt": cmd_shape_opt,
+        "multi-load": cmd_multi_load,
         "generate-data": cmd_generate_data,
         "train": cmd_train,
         "predict": cmd_predict,
